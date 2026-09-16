@@ -537,6 +537,12 @@
     container.innerHTML = "";
   }
 
+  function isSmallScreen() {
+    return typeof window !== "undefined" &&
+           typeof window.innerWidth === "number" &&
+           window.innerWidth <= 500;
+  }
+
   function createSparkles(x, y) {
     var container = qs(".experience") || document.body;
     var count = 6 + Math.floor(Math.random() * 4);
@@ -565,7 +571,7 @@
   function makeFallingRoses(amount) {
     clearAnimated(falling);
     var reduced = isReducedMotion();
-    var actualAmount = reduced ? 8 : amount;
+    var actualAmount = reduced ? 8 : (isSmallScreen() ? Math.round(amount * 0.5) : amount);
 
     for (var i = 0; i < actualAmount; i += 1) {
       (function (idx) {
@@ -615,7 +621,7 @@
     clearAnimated(confettiEl);
     var colors = ["#ffd56f", "#ff6e88", "#f8f0d7", "#7bd0c5", "#bd3652"];
     var reduced = isReducedMotion();
-    var actualAmount = reduced ? 15 : amount;
+    var actualAmount = reduced ? 15 : (isSmallScreen() ? Math.round(amount * 0.6) : amount);
 
     for (var i = 0; i < actualAmount; i += 1) {
       var item = document.createElement("i");
@@ -649,7 +655,7 @@
 
   function makeFinaleGlow(amount) {
     var reduced = isReducedMotion();
-    var actualAmount = reduced ? 10 : amount;
+    var actualAmount = reduced ? 10 : (isSmallScreen() ? Math.round(amount * 0.6) : amount);
     for (var i = 0; i < actualAmount; i += 1) {
       var item = document.createElement("i");
       item.className = "conf finale-glow";
