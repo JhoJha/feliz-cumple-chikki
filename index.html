@@ -123,6 +123,7 @@
 
       <!-- ── Escena 3: Pabellón de Constelaciones Románticas ── -->
       <section id="stage" class="scene stage-scene romantic-pavilion-scene" aria-hidden="true">
+        <canvas id="skyCanvas" class="sky-canvas" aria-hidden="true"></canvas>
         <div class="constellation-container" aria-hidden="true">
           <div class="heart-constellation">
             <span class="star-node n-node">N</span>
@@ -131,6 +132,7 @@
           </div>
         </div>
         <div class="stage-content romantic-stage">
+          <p id="skyCaption" class="sky-caption"><span data-copy="skyLead">El cielo la noche de tu cumpleaños</span><br /><strong id="skyDate">16 de septiembre de 2026</strong></p>
           <p id="announcement" class="announcement"><span data-copy="announcementLead">¡Con todo mi corazón y mi amor,</span><br /><span data-copy="announcementEnd">esta serenata es dedicada solo a ti!</span></p>
           
           <div class="romantic-ensemble" role="group" data-aria-label="ensembleGroupLabel" aria-label="Ensamble de música romántica">
@@ -202,6 +204,6 @@
       <p id="toast" class="toast" role="status" aria-live="polite"></p>
       <p class="credit" data-copy="credit">Hecho con todo mi amor para mi hermosa Chikki 🌹</p>
     </main>
-    <script src="./script.js?v=10"></script>
+    <script src="./script.js?v=11"></script>
   </body>
 </html>

@@ -16,6 +16,10 @@
     signature: "Chango",
     publicUrl: "https://jhojha.github.io/feliz-cumple-chikki/",
     audioUrl: "./serenata.mp3",
+    // Cielo dedicado: la noche que se dibuja en la escena del pabellón.
+    sky: {
+      dateISO: "2026-09-16",
+    },
     // Ritmo inicial; la persona puede cambiarlo antes de iniciar la serenata.
     sequenceMode: "full",
     text: {
@@ -64,6 +68,7 @@
       cakeInstruction: "✨ ¡Toca las velas para pedir un deseo! ✨",
       cakeWish: "🎉 ¡Deseo concedido! ¡Te amo mi Chikki hermosa! 💖",
       cakeToast: "🎉 ¡Feliz Cumpleaños Nicoin! 🎂💖",
+      skyLead: "El cielo la noche de tu cumpleaños",
       finalEyebrow: "CON TODO MI AMOR ETERNO",
       finalLead: "¡Que viva la",
       finalHighlight: "cumpleañera más hermosa!",
@@ -145,6 +150,7 @@
       cakeInstruction: "✨ Tocca le candeline per esprimere un desiderio! ✨",
       cakeWish: "🎉 Desiderio esaudito! Ti amo mia bellissima Chikki! 💖",
       cakeToast: "🎉 Buon compleanno Nicoin! 🎂💖",
+      skyLead: "Il cielo la notte del tuo compleanno",
       finalEyebrow: "CON TUTTO IL MIO AMORE ETERNO",
       finalLead: "Viva la",
       finalHighlight: "festeggiata più bella!",
@@ -257,6 +263,8 @@
   var secondaryHideTimer  = null;
   var audioLoadingTimer   = null;
   var activeDelays       = DELAYS;
+  var skyRafId            = null;   // animación del cielo dedicado
+  var skyStars            = [];     // estrellas generadas desde la fecha
 
   function getStoredValue(key, legacyKey) {
     try {
@@ -333,6 +341,7 @@
     }
     clearAudioFades();
     clearIntroAmbience();
+    stopDedicatedSky();
     window.clearTimeout(secondaryHintTimer);
     window.clearTimeout(secondaryHideTimer);
     secondaryHintTimer = null;
@@ -564,6 +573,20 @@
     var wishGranted = candleLeft && candleLeft.classList.contains("extinguished");
     if (candleInstruction && !wishGranted) {
       candleInstruction.textContent = text("cakeInstruction");
+    }
+
+    // Fecha del cielo dedicado (16 de septiembre de 2026 / 16 settembre 2026).
+    var skyDate = qs("#skyDate");
+    if (skyDate && SITE.sky && SITE.sky.dateISO) {
+      try {
+        var skyDay = new Date(SITE.sky.dateISO + "T12:00:00");
+        skyDate.textContent = new Intl.DateTimeFormat(
+          currentLanguage === "it" ? "it-IT" : "es-MX",
+          { day: "numeric", month: "long", year: "numeric" }
+        ).format(skyDay);
+      } catch (skyDateError) {
+        skyDate.textContent = SITE.sky.dateISO;
+      }
     }
 
     document.documentElement.lang = currentLanguage;
@@ -1065,6 +1088,7 @@
 
     schedule(function () {
       showScene(qs("#stage"));
+      startDedicatedSky();
       clearIntroAmbience();
       if (!userMuted) drumRoll();
     }, activeDelays.stageAppear, false);
@@ -1077,6 +1101,7 @@
 
     schedule(function () {
       showScene(qs("#finale"));
+      stopDedicatedSky();
       clearIntroAmbience();
       stopSerenata(false);
       makeConfetti(80);
@@ -1184,6 +1209,16 @@
         if (audioContext && audioContext.state === "suspended" && !userMuted) {
           audioContext.resume();
         }
+      }
+    }
+  });
+
+  window.addEventListener("resize", function () {
+    var stage = qs("#stage");
+    var canvas = qs("#skyCanvas");
+    if (stage && canvas && stage.classList.contains("active")) {
+      if (sizeSkyCanvas(canvas) && (isReducedMotion() || skyRafId === null)) {
+        drawSkyFrame(canvas, 1200);
       }
     }
   });
@@ -1298,6 +1333,148 @@
       if (event.target.closest("button, label, .experience-controls, .romantic-btn, .rose, .petal")) return;
       showSecondaryControlsTemporarily();
     });
+  }
+
+  // ─── Cielo dedicado ───────────────────────────────────────────────────────
+  // Campo de estrellas determinista: la misma fecha siempre dibuja el mismo
+  // cielo. La estrella dedicada (la más brillante) marca su noche especial.
+
+  function hashSkySeed(str) {
+    var hash = 2166136261;
+    for (var i = 0; i < str.length; i += 1) {
+      hash ^= str.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+    return hash >>> 0;
+  }
+
+  function mulberry32(seed) {
+    var state = seed >>> 0;
+    return function () {
+      state |= 0;
+      state = (state + 0x6D2B79F5) | 0;
+      var t = Math.imul(state ^ (state >>> 15), 1 | state);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function buildSkyStars(seedStr, count) {
+    var rand = mulberry32(hashSkySeed(seedStr || "chikki"));
+    var stars = [];
+    for (var i = 0; i < count; i += 1) {
+      var bright = rand();
+      stars.push({
+        x: rand(),
+        y: rand() * 0.85,
+        r: 0.5 + rand() * (bright > 0.93 ? 1.9 : 1.1),
+        base: 0.35 + rand() * 0.5,
+        amp: 0.12 + rand() * 0.25,
+        speed: 0.4 + rand() * 1.4,
+        phase: rand() * Math.PI * 2,
+        gold: rand() > 0.82,
+      });
+    }
+    // La estrella dedicada: siempre en el mismo lugar, la más brillante.
+    stars.push({ x: 0.5, y: 0.3, r: 3.1, base: 1, amp: 0.18, speed: 0.9, phase: 0, gold: true, dedicated: true });
+    return stars;
+  }
+
+  function sizeSkyCanvas(canvas) {
+    if (!canvas || !canvas.parentNode) return false;
+    var rect = canvas.parentNode.getBoundingClientRect();
+    if (rect.width < 2 || rect.height < 2) return false;
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    var w = Math.round(rect.width * dpr);
+    var h = Math.round(rect.height * dpr);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+    }
+    return true;
+  }
+
+  function drawSkyFrame(canvas, now) {
+    var ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    var w = canvas.width;
+    var h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    var t = now / 1000;
+    var dedicated = null;
+    for (var i = 0; i < skyStars.length; i += 1) {
+      var s = skyStars[i];
+      var alpha = s.base + s.amp * Math.sin(t * s.speed + s.phase);
+      if (alpha < 0.08) alpha = 0.08;
+      if (alpha > 1) alpha = 1;
+      var px = s.x * w;
+      var py = s.y * h;
+      var pr = s.r * (w / 800 + 0.6);
+      ctx.beginPath();
+      ctx.arc(px, py, pr, 0, Math.PI * 2);
+      ctx.fillStyle = s.gold
+        ? "rgba(255, 214, 140, " + alpha.toFixed(3) + ")"
+        : "rgba(255, 240, 245, " + alpha.toFixed(3) + ")";
+      ctx.fill();
+      if (s.dedicated) dedicated = { x: px, y: py, r: pr, alpha: alpha };
+    }
+    if (dedicated) {
+      // Halo + destello de la estrella dedicada.
+      var halo = ctx.createRadialGradient(dedicated.x, dedicated.y, 0, dedicated.x, dedicated.y, dedicated.r * 9);
+      halo.addColorStop(0, "rgba(255, 183, 3, " + (0.5 * dedicated.alpha).toFixed(3) + ")");
+      halo.addColorStop(1, "rgba(255, 183, 3, 0)");
+      ctx.beginPath();
+      ctx.arc(dedicated.x, dedicated.y, dedicated.r * 9, 0, Math.PI * 2);
+      ctx.fillStyle = halo;
+      ctx.fill();
+      // Constelación: líneas tenues hacia sus vecinas más cercanas.
+      ctx.strokeStyle = "rgba(255, 220, 150, 0.35)";
+      ctx.lineWidth = Math.max(1, w / 900);
+      var links = 0;
+      for (var j = 0; j < skyStars.length && links < 5; j += 1) {
+        var o = skyStars[j];
+        if (o.dedicated) continue;
+        var dx = o.x * w - dedicated.x;
+        var dy = o.y * h - dedicated.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < Math.min(w, h) * 0.35 && o.r > 1.1) {
+          ctx.beginPath();
+          ctx.moveTo(dedicated.x, dedicated.y);
+          ctx.lineTo(o.x * w, o.y * h);
+          ctx.stroke();
+          links += 1;
+        }
+      }
+    }
+  }
+
+  function stopDedicatedSky() {
+    if (skyRafId !== null) {
+      if (typeof window.cancelAnimationFrame === "function") window.cancelAnimationFrame(skyRafId);
+      skyRafId = null;
+    }
+  }
+
+  function startDedicatedSky() {
+    var canvas = qs("#skyCanvas");
+    if (!canvas) return;
+    stopDedicatedSky();
+    skyStars = buildSkyStars(SITE.sky && SITE.sky.dateISO ? SITE.sky.dateISO : "chikki", 170);
+    if (!sizeSkyCanvas(canvas)) return;
+    if (isReducedMotion()) {
+      drawSkyFrame(canvas, 1200); // Cielo estático elegante, sin parpadeo.
+      return;
+    }
+    var tick = function (now) {
+      var stage = qs("#stage");
+      if (!stage || !stage.classList.contains("active")) {
+        skyRafId = null;
+        return;
+      }
+      drawSkyFrame(canvas, now);
+      skyRafId = window.requestAnimationFrame(tick);
+    };
+    skyRafId = window.requestAnimationFrame(tick);
   }
 
   function playInstrumentToast(message, notes, waveType) {
