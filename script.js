@@ -1285,8 +1285,73 @@
     });
   }
 
-  // Activar interactividad en los mariachis
+  function setupRomanticInstruments() {
+    var violin = qs(".instrument-violin");
+    var piano  = qs(".instrument-piano");
+    var harp   = qs(".instrument-harp");
+    if (violin) {
+      violin.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var x = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 200);
+        var y = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 200);
+        createSparkles(x, y);
+        if (audioContext) {
+          tone(659.25, audioContext.currentTime, 0.4, "sine", 0.04);
+          tone(880, audioContext.currentTime + 0.12, 0.45, "sine", 0.04);
+        }
+        showToast("🎻 Melodía romántica de violín para ti");
+      });
+    }
+    if (piano) {
+      piano.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var x = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 200);
+        var y = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 200);
+        createSparkles(x, y);
+        if (audioContext) {
+          tone(523.25, audioContext.currentTime, 0.5, "triangle", 0.05);
+          tone(659.25, audioContext.currentTime + 0.15, 0.5, "triangle", 0.05);
+        }
+        showToast("🎹 Notas de piano acústico para ti");
+      });
+    }
+    if (harp) {
+      harp.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var x = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 200);
+        var y = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 200);
+        createSparkles(x, y);
+        if (audioContext) {
+          tone(783.99, audioContext.currentTime, 0.6, "sine", 0.04);
+          tone(1046.5, audioContext.currentTime + 0.2, 0.6, "sine", 0.04);
+        }
+        showToast("🪕 Acordes de arpa estrellada para ti");
+      });
+    }
+  }
+
+  function setupCakeInteraction() {
+    var cake = qs("#interactiveCake");
+    if (!cake) return;
+    cake.addEventListener("click", function (e) {
+      var candle1 = qs("#candleLeft");
+      var candle2 = qs("#candleRight");
+      var instruction = qs("#candleInstruction");
+      if (candle1) candle1.classList.add("extinguished");
+      if (candle2) candle2.classList.add("extinguished");
+      if (instruction) instruction.textContent = "🎉 ¡Deseo concedido! ¡Te amo mi Chikki hermosa! 💖";
+      makeConfetti(35);
+      makeFinaleGlow(15);
+      makeFallingRoses(20);
+      applause();
+      showToast("🎉 ¡Feliz Cumpleaños Nicoin! 🎂💖");
+    });
+  }
+
+  // Activar interactividad de mariachi e instrumentos románticos
   setupMariachiInteraction();
+  setupRomanticInstruments();
+  setupCakeInteraction();
   setLanguage(currentLanguage);
   preloadSerenata();
   syncSoundButton();

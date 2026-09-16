@@ -1436,3 +1436,269 @@ h2 em {
     transition-duration: 0.1s !important;
   }
 }
+
+/* ─── Componentes Románticos Exclusivos para Chikki ─────────────────────── */
+
+/* Envelope & Wax Seal */
+.envelope-wrapper {
+  margin: 16px 0 24px;
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+}
+
+.envelope-card {
+  background: linear-gradient(145deg, rgba(82, 17, 30, 0.95), rgba(43, 9, 16, 0.98));
+  border: 1.5px solid rgba(255, 183, 3, 0.4);
+  border-radius: 20px;
+  padding: 28px 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 77, 109, 0.15);
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.envelope-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 48px rgba(217, 4, 41, 0.25), inset 0 0 25px rgba(255, 183, 3, 0.25);
+}
+
+.envelope-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.envelope-header .stamp {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 0 6px rgba(255, 77, 109, 0.6));
+}
+
+.to-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #ffb703;
+  letter-spacing: 0.05em;
+  font-family: "Dancing Script", cursive;
+  font-size: 1.3rem;
+}
+
+.wax-seal-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #d90429, #9b021d);
+  border: 2px solid #ffb703;
+  border-radius: 50px;
+  color: #fff0f5;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(217, 4, 41, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.wax-seal-button:hover,
+.wax-seal-button:focus-visible {
+  transform: scale(1.06);
+  background: linear-gradient(135deg, #ff1a40, #b80022);
+  box-shadow: 0 12px 32px rgba(217, 4, 41, 0.6), inset 0 2px 6px rgba(255, 255, 255, 0.5);
+}
+
+.wax-seal {
+  font-size: 1.4rem;
+  animation: pulseHeart 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseHeart {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); filter: drop-shadow(0 0 8px #ff4d6d); }
+}
+
+/* Constellation & Starlit Pavilion */
+.constellation-container {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heart-constellation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  background: rgba(43, 9, 16, 0.55);
+  border: 1px solid rgba(255, 183, 3, 0.3);
+  padding: 12px 32px;
+  border-radius: 40px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 30px rgba(255, 77, 109, 0.3);
+}
+
+.star-node {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffb703;
+  text-shadow: 0 0 10px rgba(255, 183, 3, 0.8);
+}
+
+.constellation-heart {
+  font-size: 2.2rem;
+  animation: pulseHeart 1.5s infinite ease-in-out;
+}
+
+.romantic-ensemble {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+
+.romantic-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 20px;
+  background: rgba(103, 18, 36, 0.7);
+  border: 1.5px solid rgba(255, 183, 3, 0.4);
+  border-radius: 16px;
+  color: #fff0f5;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.romantic-btn:hover,
+.romantic-btn:focus-visible {
+  transform: translateY(-6px) scale(1.05);
+  background: rgba(217, 4, 41, 0.85);
+  border-color: #ffb703;
+  box-shadow: 0 10px 24px rgba(217, 4, 41, 0.5);
+}
+
+.instrument-icon {
+  font-size: 2.4rem;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+}
+
+.instrument-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #ffb703;
+}
+
+/* Interactive Birthday Cake with 26 Candles */
+.cake-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.interactive-cake {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+.interactive-cake:hover {
+  transform: scale(1.05);
+}
+
+.cake-candles {
+  display: flex;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: -10px;
+}
+
+.digit-candle {
+  position: relative;
+  font-family: "Playfair Display", serif;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #ffb703;
+  background: linear-gradient(180deg, #d90429, #671224);
+  border: 2px solid #ffb703;
+  border-radius: 12px;
+  padding: 4px 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+}
+
+.flame {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 20px;
+  background: radial-gradient(circle at 50% 80%, #ffffff, #ffb703 40%, #d90429 80%);
+  border-radius: 50% 50% 35% 35%;
+  filter: drop-shadow(0 0 8px #ffb703);
+  animation: flicker 0.15s infinite alternate ease-in-out;
+}
+
+.digit-candle.extinguished .flame {
+  display: none;
+}
+
+.digit-candle.extinguished::after {
+  content: "💨";
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  animation: fadeOutUp 1.2s forwards;
+}
+
+@keyframes fadeOutUp {
+  0% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -30px); }
+}
+
+@keyframes flicker {
+  0% { transform: translateX(-50%) scale(1) rotate(-1deg); }
+  100% { transform: translateX(-50%) scale(1.15) rotate(1deg); }
+}
+
+.cake-frosting {
+  font-size: 5rem;
+  line-height: 1;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+}
+
+.candle-instruction {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: #ffb703;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  animation: pulseText 2s infinite ease-in-out;
+}
+
+@keyframes pulseText {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; transform: scale(1.02); }
+}
