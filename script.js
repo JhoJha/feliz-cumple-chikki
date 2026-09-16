@@ -180,24 +180,24 @@
 
   // ─── Constantes de tiempo (ms) ────────────────────────────────────────────
   // Cambiar aquí para ajustar el ritmo de la experiencia sin buscar números sueltos.
-  // La experiencia completa dura ~56 segundos hasta llegar al finale.
+  // La experiencia completa dura ~32 segundos hasta llegar al finale.
 
   var DELAYS = {
-    birthdayMessage:   2800,  // Mensaje de cumpleaños (2.8s) - HITO
-    personalMessage:  20000,  // Mensaje personal de Chango (20s) - HITO
-    stageAppear:      29000,  // Pabellón romántico (29s)
-    serenadeStart:    32000,  // La serenata empieza (32s) - HITO
-    finale:           56000,  // Escena final con confeti (56s) - HITO
+    birthdayMessage:   2500,  // Mensaje de cumpleaños (2.5s) - HITO
+    personalMessage:  11000,  // Mensaje personal de Chango (11s) - HITO
+    stageAppear:      16000,  // Pabellón romántico (16s)
+    serenadeStart:    19000,  // La serenata empieza (19s) - HITO
+    finale:           32000,  // Escena final con confeti (32s) - HITO
   };
 
   // Versión ágil para pantallas pequeñas. Conserva los mismos momentos
-  // emocionales, pero llega al final en menos de medio minuto.
+  // emocionales, pero llega al final en unos 20 segundos.
   var SHORT_DELAYS = {
-    birthdayMessage:   2800,
-    personalMessage:   9000,
-    stageAppear:      14500,
-    serenadeStart:    16400,
-    finale:           28000,
+    birthdayMessage:   2200,
+    personalMessage:   7000,
+    stageAppear:      10000,
+    serenadeStart:    12000,
+    finale:           20000,
   };
 
   // ─── Referencias DOM ──────────────────────────────────────────────────────
@@ -374,18 +374,15 @@
     if (!experienceRunning) return;
     window.clearTimeout(secondaryHintTimer);
     window.clearTimeout(secondaryHideTimer);
+    secondaryHintTimer = null;
+    secondaryHideTimer = null;
     setSecondaryControlsVisible(true);
-    secondaryHideTimer = window.setTimeout(function () {
-      setSecondaryControlsVisible(false);
-      secondaryHideTimer = null;
-    }, 4500);
   }
 
   function scheduleSecondaryControlsHint() {
-    window.clearTimeout(secondaryHintTimer);
-    secondaryHintTimer = window.setTimeout(function () {
-      showSecondaryControlsTemporarily();
-    }, 6500);
+    // Los controles Siguiente / Ir al final quedan visibles desde el inicio
+    // para que nadie sienta que la experiencia se congeló.
+    setSecondaryControlsVisible(true);
   }
 
   function showToast(message) {
@@ -479,7 +476,6 @@
     elapsedTime = activeDelays.finale;
     updateProgress(100);
     showToast(text("toastFinale"));
-    setSecondaryControlsVisible(false);
   }
 
   // ─── Escenas ──────────────────────────────────────────────────────────────
