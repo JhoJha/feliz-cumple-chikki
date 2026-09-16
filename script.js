@@ -29,15 +29,10 @@
       welcomeHighlight: "sorpresa especial",
       welcomeEnd: "para ti, mi amor…",
       welcomeNote: "Prepárate para una serenata inolvidable hecha sólo para ti.",
-      startButton: "Abrir sorpresa",
-      startWithSound: "Con sonido",
-      startSilent: "Sin sonido",
-      soundHint: "Elige cómo quieres vivir esta experiencia romántica.",
-      soundChoiceLabel: "Cómo deseas disfrutar la serenata",
+      startButton: "Abrir mi carta de amor",
       rhythmLabel: "Ritmo de la serenata",
       shortSequence: "Versión breve",
       fullSequence: "Serenata completa",
-      languageLabel: "Idioma",
       audioLoading: "Afinando las cuerdas con amor…",
       muteButton: "Silenciar sonido",
       unmuteButton: "Activar sonido",
@@ -102,86 +97,9 @@
     },
   };
 
+  // Solo español: este regalo siempre es en español y con sonido.
   var TRANSLATIONS = {
     es: SITE.text,
-    it: {
-      documentTitle: "💖 Buon compleanno, mia bellissima Chikki! 🌹",
-      welcomeEyebrow: "PER LA PERSONA PIÙ SPECIALE DELLA MIA VITA 💖",
-      welcomeLead: "Ho una",
-      welcomeHighlight: "lettera & sorpresa",
-      welcomeEnd: "per te, amore mio…",
-      welcomeNote: "Fatta con tutto l'amore del mio cuore per te.",
-      startButton: "Apri la mia lettera d'amore",
-      startWithSound: "Con musica romantica",
-      startSilent: "Senza audio",
-      soundHint: "Scegli come vivere questa esperienza romantica.",
-      soundChoiceLabel: "Come vuoi vivere la serenata",
-      rhythmLabel: "Ritmo della serenata",
-      shortSequence: "Versione breve",
-      fullSequence: "Serenata completa",
-      languageLabel: "Lingua",
-      audioLoading: "Accordando le corde con amore…",
-      muteButton: "Disattiva l'audio",
-      unmuteButton: "Attiva l'audio",
-      progressAria: "Avanzamento della serenata",
-      introEyebrow: "OGGI È UN GIORNO DAVVERO SPECIALE 🌹",
-      introLead: "Oggi celebriamo",
-      introAgeSuffix: "anni",
-      introEnd: "della donna più bella e incredibile del mondo.",
-      birthdayLead: "Buon compleanno,",
-      birthdayRelation: "mia bellissima",
-      birthdayNote: "Che questo nuovo anno di vita sia pieno di risate, salute, sogni realizzati e momenti magici insieme. Grazie per rendermi così felice!",
-      personalLineOne: "Grazie per ogni sorriso, per il tuo amore così bello",
-      personalLineTwo: "e per rendere la mia vita più bella e completa",
-      personalLineThree: "in ogni secondo al tuo fianco.",
-      personalClosing: "Ti amo con tutto il cuore, mia Chikki!",
-      signatureCardLead: "Con tutto il mio amore,",
-      announcementLead: "Con tutto il mio cuore e il mio amore,",
-      announcementEnd: "questa serenata è dedicata solo a te!",
-      stageLineOne: "Una melodia eterna per celebrare",
-      stageLineTwo: "la tua vita, la tua bellezza e il nostro amore",
-      ensembleGroupLabel: "Ensemble di musica romantica",
-      violinLabel: "Suona il violino romantico",
-      pianoLabel: "Suona un arpeggio di pianoforte",
-      harpLabel: "Suona una nota d'arpa",
-      violinToast: "🎻 Melodia romantica di violino per te",
-      pianoToast: "🎹 Note di pianoforte per te",
-      harpToast: "🪕 Accordi d'arpa stellata per te",
-      cakeInstruction: "✨ Tocca le candeline per esprimere un desiderio! ✨",
-      cakeWish: "🎉 Desiderio esaudito! Ti amo mia bellissima Chikki! 💖",
-      cakeToast: "🎉 Buon compleanno Nicoin! 🎂💖",
-      skyLead: "Il cielo la notte del tuo compleanno",
-      finalEyebrow: "CON TUTTO IL MIO AMORE ETERNO",
-      finalLead: "Viva la",
-      finalHighlight: "festeggiata più bella!",
-      finalAgeLead: "Buon",
-      finalAgeSuffix: "anni, amore mio!",
-      signatureLead: "Con tutto l'amore del tuo",
-      credit: "Fatto con tutto il mio amore per la mia bellissima Chikki 🌹",
-      repeatButton: "Ripeti la serenata",
-      shareButton: "Condividi",
-      progressMessage: "Un messaggio speciale d'amore",
-      progressSerenade: "La serenata romantica",
-      progressFinale: "Il gran finale 💖",
-      pause: "Metti in pausa la serenata",
-      resume: "Riprendi la serenata",
-      finished: "La serenata è terminata",
-      next: "Momento successivo",
-      skip: "Vai direttamente al finale",
-      toastPaused: "Serenata in pausa",
-      toastResumed: "La serenata continua",
-      toastNext: "Passiamo al momento successivo",
-      toastFinale: "Siamo arrivati al gran finale 💖",
-      soundOn: "Audio attivato.",
-      soundOff: "Audio disattivato.",
-      audioUnavailable: "L'audio non è disponibile in questo browser.",
-      shareThanks: "Grazie per aver condiviso!",
-      shareMenuError: "Non è stato possibile aprire il menu di condivisione.",
-      shareCopied: "Link copiato!",
-      shareCopyError: "Non è stato possibile copiare il link.",
-      shareTitle: "💖 Buon compleanno, mia bellissima Chikki!",
-      shareText: "Una serenata speciale fatta con tutto il mio amore 🌹",
-    },
   };
 
   // ─── Constantes de tiempo (ms) ────────────────────────────────────────────
@@ -213,12 +131,8 @@
   var confettiEl         = qs("#confetti");
   var soundButton        = qs("#soundButton");
   var startButton        = qs("#startButton");
-  var startWithSoundButton = qs("#startWithSoundButton");
-  var startSilentButton  = qs("#startSilentButton");
   var shortSequenceButton = qs("#shortSequenceButton");
   var fullSequenceButton = qs("#fullSequenceButton");
-  var languageEsButton   = qs("#languageEsButton");
-  var languageItButton   = qs("#languageItButton");
   var audioLoadingStatus = qs("#audioLoadingStatus");
   var repeatButton       = qs("#repeatButton");
   var shareButton        = qs("#shareButton");
@@ -239,8 +153,8 @@
   // ─── Estado y Temporización ───────────────────────────────────────────────
 
   var audioEnabled      = false;
-  var userMuted         = getStoredMutePreference();
-  var currentLanguage   = getStoredLanguage();
+  var userMuted         = false;   // Este regalo siempre va con sonido.
+  var currentLanguage   = "es";    // Este regalo siempre es en español.
   var selectedSequence  = getStoredSequence();
   var audioContext      = null;
   var serenataAudio     = null;    // elemento <audio> para Las Mañanitas
@@ -277,29 +191,9 @@
     }
   }
 
-  function getStoredMutePreference() {
-    return getStoredValue("chikki:muted", "tia-lucy:muted") === "true";
-  }
-
   function saveMutePreference() {
     try {
       window.localStorage.setItem("chikki:muted", String(userMuted));
-    } catch (error) {
-      // El sitio sigue funcionando si el navegador bloquea almacenamiento local.
-    }
-  }
-
-  function getStoredLanguage() {
-    try {
-      return getStoredValue("chikki:language", "tia-lucy:language") === "it" ? "it" : "es";
-    } catch (error) {
-      return "es";
-    }
-  }
-
-  function saveLanguage() {
-    try {
-      window.localStorage.setItem("chikki:language", currentLanguage);
     } catch (error) {
       // El sitio sigue funcionando si el navegador bloquea almacenamiento local.
     }
@@ -581,7 +475,7 @@
       try {
         var skyDay = new Date(SITE.sky.dateISO + "T12:00:00");
         skyDate.textContent = new Intl.DateTimeFormat(
-          currentLanguage === "it" ? "it-IT" : "es-MX",
+          "es-MX",
           { day: "numeric", month: "long", year: "numeric" }
         ).format(skyDay);
       } catch (skyDateError) {
@@ -601,28 +495,6 @@
   function syncPreferenceButtons() {
     if (shortSequenceButton) shortSequenceButton.setAttribute("aria-pressed", String(selectedSequence === "short"));
     if (fullSequenceButton) fullSequenceButton.setAttribute("aria-pressed", String(selectedSequence === "full"));
-    if (languageEsButton) languageEsButton.setAttribute("aria-pressed", String(currentLanguage === "es"));
-    if (languageItButton) languageItButton.setAttribute("aria-pressed", String(currentLanguage === "it"));
-  }
-
-  function setLanguage(language) {
-    currentLanguage = language === "it" ? "it" : "es";
-    saveLanguage();
-    applySiteConfig();
-    syncPreferenceButtons();
-    updateProgress((elapsedTime / activeDelays.finale) * 100);
-    updateAudioLoadingStatus();
-    updatePauseButton();
-    syncSoundButton();
-    if (nextButton) {
-      nextButton.title = text("next");
-      nextButton.setAttribute("aria-label", text("next"));
-    }
-    if (skipButton) {
-      skipButton.title = text("skip");
-      skipButton.setAttribute("aria-label", text("skip"));
-    }
-    if (shareButton && !shareFeedbackTimer) delete shareButton.dataset.originalLabel;
   }
 
   function setSequence(mode) {
@@ -1304,23 +1176,20 @@
 
   // ─── Eventos e Inicialización ─────────────────────────────────────────────
 
+  // Un solo CTA: este regalo siempre empieza en español y con sonido.
   if (startButton) {
-    startButton.onclick = startExperience;
+    startButton.onclick = function () { startExperience(true); };
     startButton.onkeydown = function (event) {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        startExperience();
+        startExperience(true);
       }
     };
   }
 
-  if (startWithSoundButton) startWithSoundButton.onclick = function () { startExperience(true); };
-  if (startSilentButton) startSilentButton.onclick = function () { startExperience(false); };
   if (shortSequenceButton) shortSequenceButton.onclick = function () { setSequence("short"); };
   if (fullSequenceButton) fullSequenceButton.onclick = function () { setSequence("full"); };
-  if (languageEsButton) languageEsButton.onclick = function () { setLanguage("es"); };
-  if (languageItButton) languageItButton.onclick = function () { setLanguage("it"); };
-  if (repeatButton) repeatButton.onclick = startExperience;
+  if (repeatButton) repeatButton.onclick = function () { startExperience(true); };
   if (soundButton)  soundButton.onclick  = toggleSound;
   if (shareButton)  shareButton.onclick  = shareExperience;
   if (pauseButton)  pauseButton.onclick  = togglePause;
@@ -1562,7 +1431,11 @@
   // Activar interactividad romántica
   setupRomanticInstruments();
   setupCakeInteraction();
-  setLanguage(currentLanguage);
+  applySiteConfig();
+  syncPreferenceButtons();
+  updateAudioLoadingStatus();
+  updatePauseButton();
+  syncSoundButton();
   preloadSerenata();
   syncSoundButton();
 

@@ -306,23 +306,6 @@ h2 em {
   margin-left: 0;
 }
 
-.js .native-start-button {
-  display: none;
-}
-
-.sound-choice {
-  position: relative;
-  z-index: 12;
-  display: none;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-.js .sound-choice {
-  display: flex;
-}
-
 .welcome-preferences {
   position: relative;
   z-index: 12;
@@ -372,12 +355,6 @@ h2 em {
 .preference-button:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 2px;
-}
-
-.language-button {
-  min-width: 31px;
-  padding-left: 7px;
-  padding-right: 7px;
 }
 
 .audio-loading {
@@ -1112,14 +1089,6 @@ h2 em {
 @media (max-width: 500px) {
   .scene {
     padding: 28px 16px calc(96px + env(safe-area-inset-bottom));
-  }
-  .sound-choice {
-    width: min(100%, 330px);
-  }
-  .sound-choice .button {
-    min-height: 48px;
-    flex: 1 1 135px;
-    padding: 13px 17px;
   }
   .welcome-preferences {
     max-width: 340px;
