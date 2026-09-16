@@ -696,7 +696,10 @@ h2 em {
   width: 100%;
   height: 100%;
   z-index: 0;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .sky-caption {
@@ -717,6 +720,27 @@ h2 em {
 }
 
 .stage-scene.open .sky-caption {
+  opacity: 1;
+  transform: none;
+}
+
+.star-counter {
+  margin: 10px 0 0;
+  padding: 6px 16px;
+  border: 1px solid rgba(255, 183, 3, 0.35);
+  border-radius: 999px;
+  background: rgba(43, 9, 16, 0.55);
+  backdrop-filter: blur(6px);
+  color: #ffe9bd;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.7s ease 1.4s, transform 0.7s ease 1.4s;
+}
+
+.stage-scene.open .star-counter {
   opacity: 1;
   transform: none;
 }

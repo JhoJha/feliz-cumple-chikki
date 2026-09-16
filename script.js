@@ -179,6 +179,28 @@
   var activeDelays       = DELAYS;
   var skyRafId            = null;   // animación del cielo dedicado
   var skyStars            = [];     // estrellas generadas desde la fecha
+  var starCount           = 0;      // destellos únicos regalados
+  var starNoteIndex       = 0;
+
+  var STAR_NOTES = [
+    "Eres mi estrella favorita",
+    "Brillas más que todas ellas",
+    "Pedí un deseo y eras tú",
+    "Mi cielo siempre eres tú",
+    "Cada estrella me recuerda a ti",
+    "Contigo, hasta el infinito",
+    "Tu sonrisa ilumina mi noche",
+    "Nuestro amor no tiene fin"
+  ];
+
+  var STAR_MILESTONES = {
+    1: "✨ El primer destello es para ti",
+    10: "✨ ¡10 destellos! Sigue brillando",
+    26: "💖 ¡26 destellos, uno por cada año tuyo!",
+    50: "🌟 ¡50 destellos! Tu cielo está de fiesta",
+    100: "💫 ¡100 destellos! Eres mi universo",
+    171: "🌌 ¡Encendiste todo su cielo!"
+  };
 
   function getStoredValue(key, legacyKey) {
     try {
@@ -1242,10 +1264,11 @@
         speed: 0.4 + rand() * 1.4,
         phase: rand() * Math.PI * 2,
         gold: rand() > 0.82,
+        collected: false,
       });
     }
     // La estrella dedicada: siempre en el mismo lugar, la más brillante.
-    stars.push({ x: 0.5, y: 0.3, r: 3.1, base: 1, amp: 0.18, speed: 0.9, phase: 0, gold: true, dedicated: true });
+    stars.push({ x: 0.5, y: 0.3, r: 3.1, base: 1, amp: 0.18, speed: 0.9, phase: 0, gold: true, dedicated: true, collected: false });
     return stars;
   }
 
@@ -1276,12 +1299,14 @@
       var alpha = s.base + s.amp * Math.sin(t * s.speed + s.phase);
       if (alpha < 0.08) alpha = 0.08;
       if (alpha > 1) alpha = 1;
+      var isGold = s.gold || s.collected;
+      if (s.collected && alpha < 0.9) alpha = 0.9; // Las regaladas quedan encendidas.
       var px = s.x * w;
       var py = s.y * h;
       var pr = s.r * (w / 800 + 0.6);
       ctx.beginPath();
       ctx.arc(px, py, pr, 0, Math.PI * 2);
-      ctx.fillStyle = s.gold
+      ctx.fillStyle = isGold
         ? "rgba(255, 214, 140, " + alpha.toFixed(3) + ")"
         : "rgba(255, 240, 245, " + alpha.toFixed(3) + ")";
       ctx.fill();
@@ -1329,6 +1354,9 @@
     if (!canvas) return;
     stopDedicatedSky();
     skyStars = buildSkyStars(SITE.sky && SITE.sky.dateISO ? SITE.sky.dateISO : "chikki", 170);
+    starCount = 0;
+    starNoteIndex = 0;
+    updateStarCounter();
     if (!sizeSkyCanvas(canvas)) return;
     if (isReducedMotion()) {
       drawSkyFrame(canvas, 1200); // Cielo estático elegante, sin parpadeo.
@@ -1344,6 +1372,75 @@
       skyRafId = window.requestAnimationFrame(tick);
     };
     skyRafId = window.requestAnimationFrame(tick);
+  }
+
+  function updateStarCounter() {
+    var counter = qs("#starCounter");
+    if (!counter) return;
+    if (starCount <= 0) {
+      counter.textContent = "✨ Toca las estrellas";
+    } else if (starCount === 1) {
+      counter.textContent = "✨ 1 destello para ti";
+    } else {
+      counter.textContent = "✨ " + starCount + " destellos para ti";
+    }
+  }
+
+  function collectStar(clientX, clientY) {
+    var canvas = qs("#skyCanvas");
+    var stage = qs("#stage");
+    if (!canvas || !stage || !stage.classList.contains("active") || skyStars.length === 0) return;
+    var rect = canvas.getBoundingClientRect();
+    if (rect.width < 2) return;
+    var tapX = (clientX - rect.left) / rect.width;
+    var tapY = (clientY - rect.top) / rect.height;
+    var best = null;
+    var bestDist = 0.055; // ~ radio de toque en coordenadas relativas
+    for (var i = 0; i < skyStars.length; i += 1) {
+      var s = skyStars[i];
+      var dx = s.x - tapX;
+      var dy = (s.y - tapY) * (rect.height / rect.width); // píxeles equivalentes
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = s;
+      }
+    }
+    if (!best) return;
+    createSparkles(clientX, clientY);
+    if (audioEnabled && !userMuted && audioContext) {
+      try {
+        var scale = [523.25, 587.33, 659.25, 783.99, 880];
+        var freq = scale[starCount % scale.length];
+        tone(freq, audioContext.currentTime, 0.5, "sine", 0.045);
+        tone(freq * 2, audioContext.currentTime + 0.08, 0.4, "sine", 0.02);
+      } catch (starToneError) {
+        // El destello visual sigue aunque falle Web Audio.
+      }
+    }
+    if (!best.collected) {
+      best.collected = true;
+      starCount += 1;
+      updateStarCounter();
+      if (Object.prototype.hasOwnProperty.call(STAR_MILESTONES, starCount)) {
+        showToast(STAR_MILESTONES[starCount]);
+        return;
+      }
+    }
+    showToast("⭐ " + STAR_NOTES[starNoteIndex % STAR_NOTES.length]);
+    starNoteIndex += 1;
+  }
+
+  function setupStarTouch() {
+    var canvas = qs("#skyCanvas");
+    if (!canvas || canvas.dataset.touchReady === "true") return;
+    canvas.dataset.touchReady = "true";
+    canvas.addEventListener("pointerdown", function (e) {
+      e.stopPropagation();
+      var x = (typeof e.clientX === "number") ? e.clientX : 200;
+      var y = (typeof e.clientY === "number") ? e.clientY : 200;
+      collectStar(x, y);
+    });
   }
 
   function playInstrumentToast(message, notes, waveType) {
@@ -1431,6 +1528,7 @@
   // Activar interactividad romántica
   setupRomanticInstruments();
   setupCakeInteraction();
+  setupStarTouch();
   applySiteConfig();
   syncPreferenceButtons();
   updateAudioLoadingStatus();
