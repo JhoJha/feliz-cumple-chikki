@@ -1,0 +1,1438 @@
+/* ─── Variables globales ─────────────────────────────────────────────────── */
+
+:root {
+  --wine:  #671224;
+  --red:   #d90429;
+  --rose:  #ff4d6d;
+  --gold:  #ffb703;
+  --cream: #fff0f5;
+  --ink:   #2b0910;
+}
+
+/* ─── Reset y base ───────────────────────────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #1a050a;
+  color: var(--cream);
+  font-family: "DM Sans", sans-serif;
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── Fallback sin JavaScript ────────────────────────────────────────────── */
+
+.noscript-message {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 32px;
+  background: radial-gradient(circle at 50% 40%, #851c2e, #3d0e19 55%, #1a050a);
+  color: var(--cream);
+  text-align: center;
+}
+
+.noscript-message p {
+  margin: 0;
+  font-family: "Georgia", serif;
+  font-size: clamp(1rem, 3vw, 1.35rem);
+  line-height: 1.55;
+}
+
+.noscript-message p:first-child {
+  font-size: clamp(1.5rem, 5vw, 2.4rem);
+}
+
+/* ─── Experiencia general ────────────────────────────────────────────────── */
+
+.experience {
+  min-height: 100svh;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(circle at 50% 12%, #851c2e 0, #3d0e19 45%, #1a050a 100%);
+}
+
+.night-sky {
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image:
+    radial-gradient(#fff 1px, transparent 1.5px),
+    radial-gradient(#fff 1px, transparent 1.5px);
+  background-position: 15% 25%, 80% 40%;
+  background-size: 120px 140px, 170px 190px;
+  z-index: -2;
+  animation: twinkle 6s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.28; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.01); }
+}
+
+.night-sky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, #22090d 100%);
+}
+
+/* ─── Estrellas fugaces ──────────────────────────────────────────────────── */
+
+.shooting-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.shooting-stars i {
+  position: absolute;
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, #fff, rgba(255, 235, 174, 0.8), transparent);
+  border-radius: 999px;
+  opacity: 0;
+  filter: drop-shadow(0 0 5px rgba(255, 244, 220, 0.8));
+  animation: shoot 8s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+.shooting-stars i:nth-child(1) { top: 12%; left: 55%; animation-delay: 1.5s; width: 110px; }
+.shooting-stars i:nth-child(2) { top: 28%; left: 75%; animation-delay: 4.2s; width: 70px; }
+.shooting-stars i:nth-child(3) { top: 8%;  left: 20%; animation-delay: 6.8s; width: 95px; }
+.shooting-stars i:nth-child(4) { top: 20%; left: 40%; animation-delay: 9.5s; width: 85px; }
+
+@keyframes shoot {
+  0%, 85% {
+    opacity: 0;
+    transform: rotate(-35deg) translate3d(250px, -250px, 0) scaleX(0.5);
+  }
+  87% {
+    opacity: 1;
+    transform: rotate(-35deg) translate3d(0, 0, 0) scaleX(1);
+  }
+  95%, 100% {
+    opacity: 0;
+    transform: rotate(-35deg) translate3d(-400px, 400px, 0) scaleX(0.2);
+  }
+}
+
+/* ─── Escenas ────────────────────────────────────────────────────────────── */
+
+.scene {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 32px 20px 72px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.03);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease,
+    visibility 0s 0.8s;
+}
+
+.scene.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+/* ─── Escena 1: Bienvenida ───────────────────────────────────────────────── */
+
+.welcome-scene {
+  align-content: center;
+  background: linear-gradient(180deg, rgba(38, 8, 12, 0.15), rgba(24, 7, 10, 0.6));
+}
+
+.spotlight {
+  width: min(64vw, 530px);
+  height: 72vh;
+  position: absolute;
+  top: -8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(255, 235, 174, 0.13), transparent);
+  clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
+  filter: blur(3px);
+}
+
+.eyebrow {
+  letter-spacing: 0.21em;
+  font-size: clamp(0.62rem, 1.8vw, 0.8rem);
+  color: var(--gold);
+  font-weight: 700;
+  margin: 0 0 17px;
+}
+
+h1,
+h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  margin: 0;
+  font-weight: 700;
+  line-height: 0.98;
+}
+
+h1 {
+  font-size: clamp(2.8rem, 8vw, 6.25rem);
+  text-shadow: 0 5px 25px #150407;
+}
+
+/* font-style explícito para no depender del estilo por defecto del navegador */
+h1 em,
+h2 em {
+  color: var(--gold);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.welcome-note {
+  color: #f1dcb6;
+  font-size: clamp(0.95rem, 2.5vw, 1.12rem);
+  margin: 23px 0 28px;
+}
+
+/* ─── Botones ────────────────────────────────────────────────────────────── */
+
+.button {
+  position: relative;
+  z-index: 12;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  padding: 15px 23px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+}
+
+.button:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+.button:focus-visible,
+.sound-button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+
+.button-primary {
+  background: var(--gold);
+  color: #431119;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.button-quiet {
+  background: rgba(255, 244, 220, 0.1);
+  color: #fff1d5;
+  border: 1px solid rgba(255, 244, 220, 0.48);
+  backdrop-filter: blur(7px);
+}
+
+.button-light {
+  background: var(--cream);
+  color: #6d1726;
+  box-shadow: 0 7px 22px #3b0d16;
+}
+
+/* Botón de compartir — estilo glassmorphism suave */
+.button-share {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--cream);
+  border: 1px solid rgba(255, 244, 220, 0.3);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.button span {
+  margin-left: 8px;
+  font-size: 1.15em;
+}
+
+.button > span:first-child {
+  margin-left: 0;
+}
+
+.js .native-start-button {
+  display: none;
+}
+
+.sound-choice {
+  position: relative;
+  z-index: 12;
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.js .sound-choice {
+  display: flex;
+}
+
+.welcome-preferences {
+  position: relative;
+  z-index: 12;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 14px;
+  margin-top: 17px;
+}
+
+.preference-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 7px;
+  border: 1px solid rgba(255, 244, 220, 0.16);
+  border-radius: 999px;
+  background: rgba(20, 3, 8, 0.18);
+}
+
+.preference-label {
+  margin: 0 3px 0 2px;
+  color: rgba(255, 239, 207, 0.82);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.preference-button {
+  min-height: 29px;
+  padding: 5px 9px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 239, 207, 0.7);
+  font: 700 0.67rem "DM Sans", sans-serif;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.preference-button[aria-pressed="true"] {
+  border-color: rgba(255, 218, 135, 0.44);
+  background: rgba(242, 205, 121, 0.18);
+  color: #fff2cf;
+}
+
+.preference-button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.language-button {
+  min-width: 31px;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.audio-loading {
+  position: relative;
+  z-index: 12;
+  min-height: 1.2em;
+  margin: 10px 0 0;
+  color: #f4d99c;
+  font: italic 0.76rem "Playfair Display", serif;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.audio-loading.visible {
+  opacity: 1;
+}
+
+/* Acciones agrupadas en el finale */
+.finale-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Checkbox nativo oculto — fallback sin JS */
+.native-start {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#experienceToggle:checked ~ .welcome-scene {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.97);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    visibility 0s 0.35s;
+}
+
+#experienceToggle:checked ~ .celebration-scene {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+#experienceToggle:checked ~ .celebration-scene .intro-message {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.15s;
+}
+
+.sound-hint {
+  margin: 15px 0 0;
+  color: #f0d8c2;
+  font-size: 0.82rem;
+}
+
+/* ─── Escena 2: Celebración ──────────────────────────────────────────────── */
+
+.celebration-scene {
+  align-content: center;
+  gap: 24px;
+  background: radial-gradient(circle at 50% 50%, rgba(141, 35, 54, 0.45), transparent 58%);
+}
+
+.message-card {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.celebration-scene.active .intro-message {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.5s;
+}
+
+.birthday-message {
+  max-width: 650px;
+  display: none;
+}
+
+.birthday-message.show {
+  display: block;
+  animation: rise 0.8s 0.1s both;
+}
+
+.message-card h2 {
+  font-size: clamp(2rem, 5vw, 4.2rem);
+}
+
+.rose-divider {
+  color: #f2cd79;
+  margin: 0 0 16px;
+  font-size: 1.35rem;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 12px rgba(242, 205, 121, 0.35);
+}
+
+.birthday-message h2 {
+  color: var(--cream);
+}
+
+.birthday-message h2 span {
+  color: var(--gold);
+}
+
+.birthday-message > p:last-child {
+  font-size: clamp(1rem, 2.6vw, 1.25rem);
+  color: #f0d8c2;
+  line-height: 1.55;
+  margin: 24px auto 0;
+  max-width: 540px;
+}
+
+/* Tercer mensaje: personal de Jhayro */
+.personal-message {
+  max-width: 600px;
+  display: none;
+}
+
+.personal-message.show {
+  display: block;
+  animation: rise 0.9s 0.1s both;
+}
+
+.dedication-card {
+  position: relative;
+  max-width: 570px;
+  padding: clamp(25px, 5vw, 42px) clamp(22px, 6vw, 55px);
+  border: 1px solid rgba(242, 205, 121, 0.58);
+  border-radius: 4px 18px 7px 16px;
+  background:
+    linear-gradient(110deg, rgba(255, 248, 222, 0.13), rgba(113, 22, 35, 0.18)),
+    rgba(54, 12, 20, 0.78);
+  box-shadow: 0 18px 45px rgba(13, 1, 4, 0.38), inset 0 0 25px rgba(255, 232, 186, 0.08);
+  transform: rotate(-1deg);
+}
+
+.dedication-card::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed rgba(255, 227, 165, 0.25);
+  border-radius: 3px 14px 5px 13px;
+  pointer-events: none;
+}
+
+.personal-text {
+  font: italic clamp(1.1rem, 2.8vw, 1.45rem) / 1.7 "Playfair Display", serif;
+  color: #fde8c8;
+  margin: 0 auto;
+  max-width: 520px;
+}
+
+.personal-text em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.dedication-signature {
+  margin: 21px 0 0;
+  color: #fff0cf;
+  font: italic clamp(1.05rem, 2.8vw, 1.35rem) "Playfair Display", serif;
+  animation: signature-appear 1.2s 0.55s both;
+}
+
+.dedication-signature strong {
+  color: var(--gold);
+  font-size: 1.14em;
+}
+
+@keyframes signature-appear {
+  from { opacity: 0; transform: translateX(-12px) rotate(-2deg); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ─── Elementos que caen (rosas y confeti) ───────────────────────────────── */
+
+.falling,
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -45px;
+  width: 17px;
+  height: 25px;
+  border-radius: 75% 25% 70% 30%;
+  background: linear-gradient(120deg, #ff8b9a, #bb263c 68%);
+  box-shadow: 0 1px 4px #50131c;
+  animation: fall var(--duration) linear var(--delay) forwards;
+  pointer-events: auto;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rose {
+  position: absolute;
+  top: -75px;
+  width: clamp(34px, 5vw, 46px);
+  height: clamp(52px, 7vw, 66px);
+  animation: fall var(--duration) linear var(--delay) forwards;
+  filter: drop-shadow(0 6px 5px rgba(38, 2, 9, 0.55));
+  pointer-events: auto;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.golden-sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ffdc8a, 0 0 16px #ffb32b;
+  pointer-events: none;
+  z-index: 25;
+  animation: sparkle-fade 0.5s ease-out forwards;
+}
+
+@keyframes sparkle-fade {
+  0% { transform: scale(1) translate3d(0, 0, 0); opacity: 1; }
+  100% { transform: scale(0) translate3d(var(--sx), var(--sy), 0); opacity: 0; }
+}
+
+.rose::before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 34px;
+  left: 50%;
+  top: 27px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #38612d, #81a85b 48%, #264b27);
+  transform: rotate(5deg);
+  transform-origin: top;
+}
+
+.rose::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 9px;
+  left: 50%;
+  top: 42px;
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(135deg, #739c51, #2c572d);
+  transform: rotate(17deg);
+  box-shadow: -9px -16px 0 -3px #466f38;
+}
+
+.rose-layer {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 0;
+  transform-origin: 50% 85%;
+  border-radius: 62% 38% 55% 45% / 62% 48% 52% 38%;
+  background: radial-gradient(circle at 32% 23%, #ffacb7 0 8%, #e34b61 36%, #a91232 76%, #6c0d22 100%);
+  box-shadow:
+    inset 2px 2px 4px rgba(255, 225, 225, 0.3),
+    inset -3px -4px 5px rgba(70, 0, 13, 0.34);
+}
+
+.rose-layer-1 { width: 31px; height: 29px; margin-left: -25px; top: 7px;  transform: rotate(-33deg); }
+.rose-layer-2 { width: 31px; height: 30px; margin-left: -6px;  top: 6px;  transform: rotate(38deg) scaleX(-1); }
+.rose-layer-3 { width: 29px; height: 31px; margin-left: -15px; top: 0;    transform: rotate(3deg); }
+.rose-layer-4 {
+  width: 20px;
+  height: 22px;
+  margin-left: -13px;
+  top: 7px;
+  transform: rotate(-18deg);
+  background: radial-gradient(circle at 35% 28%, #ff8fa1, #c41c3c 55%, #750c25);
+}
+.rose-layer-5 {
+  width: 14px;
+  height: 17px;
+  margin-left: -4px;
+  top: 9px;
+  transform: rotate(25deg);
+  background: linear-gradient(145deg, #f2697d, #a50f30 70%);
+}
+
+@keyframes fall {
+  to {
+    transform: translate3d(var(--drift), 110svh, 0) rotate(720deg);
+    opacity: 0.35;
+  }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ─── Escena 3: Escenario ────────────────────────────────────────────────── */
+
+/* perspective en el padre mejora el renderizado de rotateY en Firefox */
+.stage-scene {
+  padding: 0;
+  background: #17080c;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.stage-top {
+  position: absolute;
+  height: 13vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(#25080f, #521422);
+  box-shadow: 0 5px 18px #080203;
+  z-index: 5;
+}
+
+.stage-lights {
+  position: absolute;
+  top: 7vh;
+  z-index: 4;
+  display: flex;
+  width: min(80vw, 850px);
+  justify-content: space-between;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.stage-lights i {
+  width: clamp(13px, 2vw, 23px);
+  height: clamp(13px, 2vw, 23px);
+  border-radius: 50%;
+  background: #fff5b1;
+  box-shadow:
+    0 0 12px 5px #eabe53,
+    0 0 50px 18px rgba(255, 202, 84, 0.35);
+}
+
+.stage-scene.open .stage-lights {
+  opacity: 1;
+}
+
+.curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 54%;
+  z-index: 6;
+  background: repeating-linear-gradient(
+    90deg,
+    #7c1428 0 7%,
+    #9c2639 7% 14%,
+    #651020 14% 22%
+  );
+  box-shadow:
+    inset 12px 0 22px rgba(45, 0, 6, 0.4),
+    inset -12px 0 22px rgba(45, 0, 6, 0.42);
+  transition: transform 1.7s cubic-bezier(0.68, -0.2, 0.21, 1.08);
+}
+
+.curtain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255, 150, 150, 0.12), transparent 40%, rgba(0, 0, 0, 0.25));
+}
+
+.curtain-left {
+  left: 0;
+  transform-origin: left center;
+}
+
+.curtain-right {
+  right: 0;
+  transform-origin: right center;
+}
+
+.stage-scene.open .curtain-left  { transform: translateX(-90%) rotateY(12deg); }
+.stage-scene.open .curtain-right { transform: translateX(90%)  rotateY(-12deg); }
+
+.stage-content {
+  align-self: end;
+  width: 100%;
+  min-height: 70%;
+  position: relative;
+  padding-bottom: 5vh;
+  z-index: 2;
+  background: radial-gradient(ellipse at 50% 92%, #863432 0, #42151b 38%, #21090d 73%);
+}
+
+.announcement {
+  position: absolute;
+  width: 100%;
+  top: 12%;
+  margin: 0;
+  color: var(--gold);
+  font: 700 clamp(1.35rem, 3.8vw, 2.7rem) / 1.15 "Playfair Display", serif;
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: 0.65s ease;
+}
+
+.stage-scene.open .announcement {
+  opacity: 1;
+  transform: none;
+  transition-delay: 1.5s;
+}
+
+.mariachis {
+  position: absolute;
+  bottom: 3%;
+  width: min(86vw, 650px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: clamp(8px, 5vw, 58px);
+  opacity: 0;
+  transition: opacity 0.7s ease 2s;
+}
+
+.stage-scene.open .mariachis {
+  opacity: 1;
+}
+
+.mariachi {
+  width: clamp(76px, 14vw, 120px);
+  height: clamp(175px, 30vw, 260px);
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  animation: sway 2.1s ease-in-out infinite alternate;
+  filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.4));
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mariachi:hover .guitar, .mariachi:hover .trumpet {
+  filter: drop-shadow(0 0 12px var(--gold));
+  transform: scale(1.15) rotate(-12deg);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.mariachi:focus-visible,
+.ctrl-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+
+.mariachi.bounce-effect {
+  animation: mariachi-jump 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) !important;
+}
+
+.mariachi-center {
+  animation-delay: -0.8s;
+  transform: scale(1.12);
+  transform-origin: bottom;
+}
+
+.mariachi-center.bounce-effect {
+  animation: mariachi-jump-center 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) !important;
+}
+
+.mariachi-right {
+  animation-delay: -1.5s;
+}
+
+/* Coreografía al entrar la serenata: cada músico conserva su propio gesto. */
+.stage-scene.performing .mariachi-left {
+  animation: mariachi-guitar-left 1.45s ease-in-out infinite;
+}
+
+.stage-scene.performing .mariachi-center {
+  animation: mariachi-trumpet 1.45s ease-in-out 0.16s infinite;
+}
+
+.stage-scene.performing .mariachi-right {
+  animation: mariachi-guitar-right 1.45s ease-in-out 0.32s infinite;
+}
+
+@keyframes mariachi-guitar-left {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  24% { transform: translateY(-8px) rotate(2deg); }
+  48% { transform: translateY(0) rotate(-4deg); }
+  72% { transform: translateY(-5px) rotate(1deg); }
+}
+
+@keyframes mariachi-trumpet {
+  0%, 100% { transform: scale(1.12) translateY(0) rotate(0); }
+  28% { transform: scale(1.15) translateY(-12px) rotate(-2deg); }
+  50% { transform: scale(1.12) translateY(0) rotate(2deg); }
+  76% { transform: scale(1.14) translateY(-7px) rotate(-1deg); }
+}
+
+@keyframes mariachi-guitar-right {
+  0%, 100% { transform: translateY(0) rotate(2deg); }
+  24% { transform: translateY(-5px) rotate(-1deg); }
+  50% { transform: translateY(0) rotate(4deg); }
+  76% { transform: translateY(-9px) rotate(-2deg); }
+}
+
+@keyframes mariachi-jump {
+  0%, 100% { transform: translateY(0) scale(1); }
+  35% { transform: translateY(-24px) scale(1.06, 0.95); filter: drop-shadow(0 16px 12px rgba(0,0,0,0.6)); }
+  70% { transform: translateY(0) scale(0.96, 1.04); }
+}
+
+@keyframes mariachi-jump-center {
+  0%, 100% { transform: scale(1.12) translateY(0); }
+  35% { transform: scale(1.18, 1.05) translateY(-26px); filter: drop-shadow(0 16px 12px rgba(0,0,0,0.6)); }
+  70% { transform: scale(1.08, 1.16) translateY(0); }
+}
+
+.sombrero {
+  position: absolute;
+  width: 112%;
+  height: 20%;
+  top: 4%;
+  left: -6%;
+  border: clamp(4px, 0.7vw, 7px) solid #e7d0a5;
+  border-radius: 50% 50% 38% 38%;
+  background: #201719;
+  box-shadow: inset 0 6px #5d4a3c;
+  z-index: 3;
+}
+
+.sombrero::after {
+  content: "";
+  position: absolute;
+  height: 70%;
+  width: 47%;
+  border-radius: 50% 50% 0 0;
+  background: #211718;
+  left: 26%;
+  bottom: 45%;
+  border: 3px solid #e7d0a5;
+  border-bottom: 0;
+}
+
+.face {
+  position: absolute;
+  width: 42%;
+  aspect-ratio: 1;
+  top: 15%;
+  left: 29%;
+  border-radius: 48%;
+  background: #c8865c;
+  z-index: 2;
+}
+
+.face::after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 8%;
+  background: #422019;
+  border-radius: 50%;
+  bottom: 20%;
+  left: 20%;
+}
+
+.body {
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  width: 70%;
+  height: 67%;
+  background: linear-gradient(90deg, #101e23 0 42%, #1f3135 42% 58%, #101e23 58%);
+  border-radius: 38% 38% 5% 5%;
+  border: 2px solid #d9caad;
+}
+
+.body::before {
+  content: "";
+  position: absolute;
+  top: 8%;
+  left: 43%;
+  height: 86%;
+  width: 13%;
+  background: #e7d0a5;
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+}
+
+.guitar,
+.trumpet {
+  position: absolute;
+  z-index: 5;
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  bottom: 17%;
+  right: -20%;
+  transform: rotate(-22deg);
+}
+
+.trumpet {
+  right: -34%;
+  bottom: 38%;
+  transform: rotate(-7deg);
+}
+
+.singing {
+  position: absolute;
+  width: 100%;
+  bottom: -2%;
+  margin: 0;
+  opacity: 0;
+  color: #ffeac4;
+  font: italic clamp(0.95rem, 2.4vw, 1.25rem) / 1.35 "Playfair Display", serif;
+  transition: opacity 0.5s ease 2.7s;
+}
+
+.stage-scene.open .singing {
+  opacity: 1;
+}
+
+@keyframes sway {
+  from { rotate: -2deg; }
+  to   { rotate:  2deg; }
+}
+
+/* ─── Escena 4: Finale ───────────────────────────────────────────────────── */
+
+.finale-scene {
+  background:
+    radial-gradient(circle at 10% 15%, rgba(255, 221, 138, 0.24) 0 2px, transparent 3px),
+    radial-gradient(circle at 85% 25%, rgba(255, 113, 140, 0.38) 0 2px, transparent 3px),
+    radial-gradient(circle at 68% 82%, rgba(255, 221, 138, 0.24) 0 2px, transparent 3px),
+    radial-gradient(circle at 50% 35%, #a83645, #4c101e 58%, #21070c);
+  background-size: 89px 107px, 127px 133px, 151px 113px, auto;
+  z-index: 3;
+}
+
+.final-content {
+  position: relative;
+  z-index: 2;
+}
+
+.finale-scene h2 {
+  font-size: clamp(3rem, 8vw, 6.1rem);
+  text-shadow: 0 5px 25px #48101a;
+}
+
+.finale-scene h2 em {
+  color: #ffdc8a;
+}
+
+.finale-scene .final-age {
+  font: 700 clamp(1.25rem, 3vw, 2rem) "Playfair Display", serif;
+  margin: 20px 0 10px;
+  color: #fff1d5;
+}
+
+.family-signature {
+  width: fit-content;
+  margin: 0 auto 28px;
+  padding: 8px 18px 10px;
+  color: #f4d99c;
+  font: italic 500 clamp(0.95rem, 2.4vw, 1.2rem) "Playfair Display", serif;
+  border-top: 1px solid rgba(234, 191, 98, 0.45);
+}
+
+.family-signature strong {
+  color: #fff5da;
+  font-weight: 700;
+}
+
+/* ─── Globos ─────────────────────────────────────────────────────────────── */
+
+.balloon {
+  position: absolute;
+  width: clamp(72px, 14vw, 122px);
+  aspect-ratio: 0.8;
+  display: grid;
+  place-items: center;
+  color: #fff5dd;
+  border-radius: 52% 48% 50% 50% / 46% 46% 54% 54%;
+  box-shadow:
+    inset -14px -16px 25px rgba(50, 0, 12, 0.28),
+    inset 7px 5px 15px rgba(255, 255, 255, 0.24),
+    0 13px 22px rgba(31, 0, 5, 0.32);
+  animation: float 3s ease-in-out infinite alternate;
+}
+
+.balloon-number {
+  position: relative;
+  z-index: 2;
+  font: 700 clamp(2.8rem, 7vw, 5rem) "Playfair Display", serif;
+  text-shadow: 0 2px 3px rgba(70, 10, 20, 0.28);
+}
+
+.balloon::before {
+  content: "";
+  position: absolute;
+  width: 21%;
+  height: 32%;
+  left: 19%;
+  top: 13%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0));
+  transform: rotate(21deg);
+  filter: blur(0.4px);
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  top: 97%;
+  left: calc(50% - 8px);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 0;
+  border-top: 15px solid var(--knot);
+  filter: drop-shadow(0 2px 1px rgba(30, 0, 5, 0.25));
+}
+
+.balloon-string {
+  position: absolute;
+  top: calc(100% + 13px);
+  left: 50%;
+  width: 35px;
+  height: 160px;
+  border-left: 1px solid rgba(255, 232, 191, 0.72);
+  border-radius: 48% 0 0 45%;
+  transform: rotate(-4deg);
+  transform-origin: top;
+}
+
+.balloon-one {
+  --knot: #8e162d;
+  top: 14%;
+  left: 10%;
+  background: radial-gradient(circle at 32% 24%, #f06b7d 0, #c62e49 32%, #8c152f 72%, #5f1023 100%);
+}
+
+.balloon-two {
+  --knot: #a77526;
+  top: 21%;
+  right: 10%;
+  background: radial-gradient(circle at 32% 24%, #ffe09a 0, #dea94c 34%, #b57b25 72%, #79501c 100%);
+  animation-delay: -1.3s;
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-18px) rotate(4deg);
+  }
+}
+
+/* ─── Confeti ────────────────────────────────────────────────────────────── */
+
+.conf {
+  position: absolute;
+  top: -15px;
+  width: 9px;
+  height: 18px;
+  background: var(--c);
+  transform: rotate(var(--r));
+  animation: confetti-fall var(--duration) linear var(--delay) forwards;
+}
+
+@keyframes confetti-fall {
+  to {
+    transform: translate3d(var(--drift), 110svh, 0) rotate(740deg);
+  }
+}
+
+.finale-glow {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ffdc8a;
+  box-shadow: 0 0 8px 2px rgba(255, 210, 102, 0.78), 0 0 20px rgba(255, 192, 74, 0.32);
+  animation: finale-glow-drift var(--glow-duration) ease-in-out var(--glow-delay) infinite alternate;
+}
+
+@keyframes finale-glow-drift {
+  from { transform: translate3d(0, 0, 0) scale(0.72); filter: brightness(0.82); }
+  to { transform: translate3d(12px, -22px, 0) scale(1.2); filter: brightness(1.24); }
+}
+
+/* ─── Controles de progreso y ritmo ──────────────────────────────────────── */
+
+.experience-controls {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: clamp(160px, 32vw, 220px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0s 0.4s;
+  pointer-events: none;
+}
+
+.progress-label {
+  margin: 0;
+  color: #fff1d5;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-shadow: 0 1px 5px rgba(22, 1, 5, 0.85);
+}
+
+.experience-controls.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease;
+  pointer-events: auto;
+}
+
+.progress-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 244, 220, 0.18);
+  border-radius: 99px;
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #e34b61, var(--gold));
+  border-radius: 99px;
+  transition: width 0.15s linear;
+  box-shadow: 0 0 8px rgba(234, 191, 98, 0.6);
+}
+
+.controls-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.secondary-controls {
+  display: none;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.experience-controls.secondary-visible .secondary-controls {
+  display: flex;
+  animation: controls-reveal 0.24s ease both;
+}
+
+@keyframes controls-reveal {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: none; }
+}
+
+.ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 244, 220, 0.35);
+  border-radius: 20px;
+  background: rgba(29, 6, 10, 0.45);
+  color: var(--cream);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.ctrl-btn-subtle {
+  border-color: rgba(255, 244, 220, 0.2);
+  background: rgba(29, 6, 10, 0.25);
+  color: rgba(255, 241, 213, 0.8);
+  font-size: 0.7rem;
+}
+
+.ctrl-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.ctrl-btn:hover {
+  background: rgba(83, 22, 32, 0.85);
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.ctrl-btn:active {
+  transform: translateY(1px) scale(0.96);
+}
+
+/* ─── Botón de sonido ────────────────────────────────────────────────────── */
+
+.sound-button {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  z-index: 20;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 244, 220, 0.45);
+  border-radius: 50%;
+  background: rgba(29, 6, 10, 0.35);
+  color: var(--cream);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.sound-button.muted {
+  opacity: 0.5;
+}
+
+.toast {
+  position: absolute;
+  z-index: 35;
+  left: 50%;
+  bottom: 54px;
+  width: max-content;
+  max-width: calc(100% - 40px);
+  margin: 0;
+  padding: 10px 15px;
+  border: 1px solid rgba(255, 244, 220, 0.28);
+  border-radius: 999px;
+  background: rgba(34, 7, 12, 0.88);
+  box-shadow: 0 8px 24px rgba(12, 0, 3, 0.32);
+  color: #fff1d5;
+  font-size: 0.83rem;
+  font-weight: 700;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ─── Crédito inferior ───────────────────────────────────────────────────── */
+
+.credit {
+  position: absolute;
+  bottom: 15px;
+  z-index: 20;
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 238, 208, 0.67);
+  font-size: 0.68rem;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 500px) {
+  .scene {
+    padding: 28px 16px calc(96px + env(safe-area-inset-bottom));
+  }
+  .sound-choice {
+    width: min(100%, 330px);
+  }
+  .sound-choice .button {
+    min-height: 48px;
+    flex: 1 1 135px;
+    padding: 13px 17px;
+  }
+  .welcome-preferences {
+    max-width: 340px;
+    gap: 7px;
+  }
+  .preference-group {
+    width: 100%;
+    justify-content: center;
+  }
+  .preference-button {
+    min-height: 34px;
+    padding: 6px 9px;
+  }
+  .stage-lights { top: 6vh; }
+  .announcement { top: 16%; }
+  .mariachis    { bottom: 6%; }
+  .singing      { bottom: 0; }
+  .balloon-one  { left: 3%; }
+  .balloon-two  { right: 3%; }
+  .finale-actions { flex-direction: column; }
+  .finale-actions .button { min-width: min(100%, 250px); min-height: 48px; }
+  .experience-controls {
+    top: auto;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    left: 14px;
+    width: min(245px, calc(100vw - 88px));
+  }
+  .controls-buttons { gap: 7px; }
+  .ctrl-btn { min-height: 44px; padding: 9px 14px; font-size: 0.78rem; }
+  .ctrl-btn-subtle { font-size: 0.72rem; }
+  .sound-button {
+    top: calc(14px + env(safe-area-inset-top));
+    right: 14px;
+    width: 48px;
+    height: 48px;
+  }
+  .credit {
+    bottom: calc(4px + env(safe-area-inset-bottom));
+    font-size: 0.63rem;
+  }
+  .toast {
+    bottom: calc(76px + env(safe-area-inset-bottom));
+    max-width: calc(100% - 32px);
+  }
+  .dedication-card { padding: 24px 19px; }
+  .personal-text { font-size: clamp(1.04rem, 5.1vw, 1.22rem); line-height: 1.58; }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Desactivar animaciones infinitas o de caída constante para evitar cinetosis y saturación de CPU */
+  .night-sky,
+  .mariachi,
+  .balloon,
+  .shooting-stars i,
+  .rose,
+  .petal,
+  .conf {
+    animation: none !important;
+  }
+  
+  /* Mantener transiciones de UI suaves pero breves (sin saltos bruscos de 0.01ms) */
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.1s !important;
+  }
+}
