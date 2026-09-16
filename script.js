@@ -52,11 +52,18 @@
       signatureCardLead: "Con todo mi amor,",
       announcementLead: "¡Con todo mi corazón y mi amor,",
       announcementEnd: "esta serenata es dedicada solo a ti!",
-      stageLineOne: "Una serenata para celebrar",
-      stageLineTwo: "tu vida, tu belleza y nuestro amor ♫",
-      mariachiGroupLabel: "Grupo de mariachis celebrando",
-      guitarLabel: "Tocar arpegio de guitarra",
-      trumpetLabel: "Tocar sonido de trompeta",
+      stageLineOne: "Una melodía eterna para celebrar",
+      stageLineTwo: "tu vida, tu belleza y nuestro amor",
+      ensembleGroupLabel: "Ensamble de música romántica",
+      violinLabel: "Tocar violín romántico",
+      pianoLabel: "Tocar arpegio de piano",
+      harpLabel: "Tocar nota de arpa",
+      violinToast: "🎻 Melodía romántica de violín para ti",
+      pianoToast: "🎹 Notas de piano acústico para ti",
+      harpToast: "🪕 Acordes de arpa estrellada para ti",
+      cakeInstruction: "✨ ¡Toca las velas para pedir un deseo! ✨",
+      cakeWish: "🎉 ¡Deseo concedido! ¡Te amo mi Chikki hermosa! 💖",
+      cakeToast: "🎉 ¡Feliz Cumpleaños Nicoin! 🎂💖",
       finalEyebrow: "CON TODO MI AMOR ETERNO",
       finalLead: "¡Que viva la",
       finalHighlight: "cumpleañera más hermosa!",
@@ -78,8 +85,6 @@
       toastResumed: "La serenata continúa",
       toastNext: "Avanzando al siguiente momento",
       toastFinale: "Llegamos al gran final 💖",
-      toastTrumpet: "¡Suena la serenata para ti!",
-      toastGuitar: "¡Qué hermosa melodía!",
       soundOn: "Sonido activado.",
       soundOff: "Sonido silenciado.",
       audioUnavailable: "El audio no está disponible en este navegador.",
@@ -95,56 +100,63 @@
   var TRANSLATIONS = {
     es: SITE.text,
     it: {
-      documentTitle: "Una sorpresa per te",
-      welcomeEyebrow: "UNA NOTTE DA RICORDARE",
-      welcomeLead: "Abbiamo una",
-      welcomeHighlight: "sorpresa",
-      welcomeEnd: "per te…",
-      welcomeNote: "Preparati a una serenata piena d'affetto.",
-      startButton: "Apri la sorpresa",
-      startWithSound: "Con audio",
+      documentTitle: "💖 Buon compleanno, mia bellissima Chikki! 🌹",
+      welcomeEyebrow: "PER LA PERSONA PIÙ SPECIALE DELLA MIA VITA 💖",
+      welcomeLead: "Ho una",
+      welcomeHighlight: "lettera & sorpresa",
+      welcomeEnd: "per te, amore mio…",
+      welcomeNote: "Fatta con tutto l'amore del mio cuore per te.",
+      startButton: "Apri la mia lettera d'amore",
+      startWithSound: "Con musica romantica",
       startSilent: "Senza audio",
-      soundHint: "Scegli come vivere questa sorpresa.",
-      soundChoiceLabel: "Come desideri vivere la serenata",
+      soundHint: "Scegli come vivere questa esperienza romantica.",
+      soundChoiceLabel: "Come vuoi vivere la serenata",
       rhythmLabel: "Ritmo della serenata",
       shortSequence: "Versione breve",
       fullSequence: "Serenata completa",
       languageLabel: "Lingua",
-      audioLoading: "Stiamo accordando gli strumenti…",
+      audioLoading: "Accordando le corde con amore…",
       muteButton: "Disattiva l'audio",
       unmuteButton: "Attiva l'audio",
       progressAria: "Avanzamento della serenata",
-      introEyebrow: "OGGI È UN GIORNO SPECIALE",
+      introEyebrow: "OGGI È UN GIORNO DAVVERO SPECIALE 🌹",
       introLead: "Oggi celebriamo",
       introAgeSuffix: "anni",
-      introEnd: "di una donna meravigliosa.",
+      introEnd: "della donna più bella e incredibile del mondo.",
       birthdayLead: "Buon compleanno,",
-      birthdayRelation: "zia",
-      birthdayNote: "Che questa nuova fase sia piena di salute, gioia e momenti indimenticabili.",
-      personalLineOne: "Grazie per il tuo amore, la tua allegria",
-      personalLineTwo: "e per essere una parte così speciale",
-      personalLineThree: "della nostra famiglia.",
-      personalClosing: "Ti vogliamo tanto bene, zia!",
-      signatureCardLead: "Con affetto,",
-      announcementLead: "Con tanto affetto,",
-      announcementEnd: "questa serenata è per te!",
-      stageLineOne: "Una serenata per celebrare",
-      stageLineTwo: "la tua vita e la tua gioia",
-      mariachiGroupLabel: "Gruppo di mariachi in festa",
-      guitarLabel: "Suona un arpeggio di chitarra",
-      trumpetLabel: "Suona la tromba",
-      finalEyebrow: "CON TUTTO IL NOSTRO AFFETTO",
+      birthdayRelation: "mia bellissima",
+      birthdayNote: "Che questo nuovo anno di vita sia pieno di risate, salute, sogni realizzati e momenti magici insieme. Grazie per rendermi così felice!",
+      personalLineOne: "Grazie per ogni sorriso, per il tuo amore così bello",
+      personalLineTwo: "e per rendere la mia vita più bella e completa",
+      personalLineThree: "in ogni secondo al tuo fianco.",
+      personalClosing: "Ti amo con tutto il cuore, mia Chikki!",
+      signatureCardLead: "Con tutto il mio amore,",
+      announcementLead: "Con tutto il mio cuore e il mio amore,",
+      announcementEnd: "questa serenata è dedicata solo a te!",
+      stageLineOne: "Una melodia eterna per celebrare",
+      stageLineTwo: "la tua vita, la tua bellezza e il nostro amore",
+      ensembleGroupLabel: "Ensemble di musica romantica",
+      violinLabel: "Suona il violino romantico",
+      pianoLabel: "Suona un arpeggio di pianoforte",
+      harpLabel: "Suona una nota d'arpa",
+      violinToast: "🎻 Melodia romantica di violino per te",
+      pianoToast: "🎹 Note di pianoforte per te",
+      harpToast: "🪕 Accordi d'arpa stellata per te",
+      cakeInstruction: "✨ Tocca le candeline per esprimere un desiderio! ✨",
+      cakeWish: "🎉 Desiderio esaudito! Ti amo mia bellissima Chikki! 💖",
+      cakeToast: "🎉 Buon compleanno Nicoin! 🎂💖",
+      finalEyebrow: "CON TUTTO IL MIO AMORE ETERNO",
       finalLead: "Viva la",
-      finalHighlight: "festeggiata!",
+      finalHighlight: "festeggiata più bella!",
       finalAgeLead: "Buon",
-      finalAgeSuffix: "compleanno!",
-      signatureLead: "Con affetto da",
-      credit: "Con amore, per una zia davvero speciale",
+      finalAgeSuffix: "anni, amore mio!",
+      signatureLead: "Con tutto l'amore del tuo",
+      credit: "Fatto con tutto il mio amore per la mia bellissima Chikki 🌹",
       repeatButton: "Ripeti la serenata",
       shareButton: "Condividi",
-      progressMessage: "Un messaggio speciale",
-      progressSerenade: "La serenata",
-      progressFinale: "Il gran finale",
+      progressMessage: "Un messaggio speciale d'amore",
+      progressSerenade: "La serenata romantica",
+      progressFinale: "Il gran finale 💖",
       pause: "Metti in pausa la serenata",
       resume: "Riprendi la serenata",
       finished: "La serenata è terminata",
@@ -153,9 +165,7 @@
       toastPaused: "Serenata in pausa",
       toastResumed: "La serenata continua",
       toastNext: "Passiamo al momento successivo",
-      toastFinale: "Siamo arrivati al gran finale",
-      toastTrumpet: "Suona la tromba!",
-      toastGuitar: "Che bella chitarra!",
+      toastFinale: "Siamo arrivati al gran finale 💖",
       soundOn: "Audio attivato.",
       soundOff: "Audio disattivato.",
       audioUnavailable: "L'audio non è disponibile in questo browser.",
@@ -163,8 +173,8 @@
       shareMenuError: "Non è stato possibile aprire il menu di condivisione.",
       shareCopied: "Link copiato!",
       shareCopyError: "Non è stato possibile copiare il link.",
-      shareTitle: "🎉 Buon compleanno, zia Lucy!",
-      shareText: "Una serenata speciale per celebrare i suoi 50 anni 🌹",
+      shareTitle: "💖 Buon compleanno, mia bellissima Chikki!",
+      shareText: "Una serenata speciale fatta con tutto il mio amore 🌹",
     },
   };
 
@@ -174,13 +184,9 @@
 
   var DELAYS = {
     birthdayMessage:   2800,  // Mensaje de cumpleaños (2.8s) - HITO
-    musicLoop1:       10000,  // Música ambiente durante celebración (10s)
-    personalMessage:  20000,  // Mensaje personal de Jhayro (20s) - HITO
-    musicLoop2:       25000,  // Música ambiente durante celebración (25s)
-    stageAppear:      29000,  // Escena del escenario (29s)
-    curtainsOpen:     32000,  // Las cortinas se abren (32s) - HITO
-    serenade:         39000,  // Primera serenata (39s)
-    serenadeRepeat:   47000,  // Segunda serenata (47s)
+    personalMessage:  20000,  // Mensaje personal de Chango (20s) - HITO
+    stageAppear:      29000,  // Pabellón romántico (29s)
+    serenadeStart:    32000,  // La serenata empieza (32s) - HITO
     finale:           56000,  // Escena final con confeti (56s) - HITO
   };
 
@@ -188,13 +194,9 @@
   // emocionales, pero llega al final en menos de medio minuto.
   var SHORT_DELAYS = {
     birthdayMessage:   2800,
-    musicLoop1:        5600,
     personalMessage:   9000,
-    musicLoop2:       11800,
     stageAppear:      14500,
-    curtainsOpen:     16400,
-    serenade:         19500,
-    serenadeRepeat:   23600,
+    serenadeStart:    16400,
     finale:           28000,
   };
 
@@ -256,17 +258,24 @@
   var audioLoadingTimer   = null;
   var activeDelays       = DELAYS;
 
-  function getStoredMutePreference() {
+  function getStoredValue(key, legacyKey) {
     try {
-      return window.localStorage.getItem("tia-lucy:muted") === "true";
+      var value = window.localStorage.getItem(key);
+      if (value !== null) return value;
+      if (legacyKey) return window.localStorage.getItem(legacyKey);
+      return null;
     } catch (error) {
-      return false;
+      return null;
     }
+  }
+
+  function getStoredMutePreference() {
+    return getStoredValue("chikki:muted", "tia-lucy:muted") === "true";
   }
 
   function saveMutePreference() {
     try {
-      window.localStorage.setItem("tia-lucy:muted", String(userMuted));
+      window.localStorage.setItem("chikki:muted", String(userMuted));
     } catch (error) {
       // El sitio sigue funcionando si el navegador bloquea almacenamiento local.
     }
@@ -274,7 +283,7 @@
 
   function getStoredLanguage() {
     try {
-      return window.localStorage.getItem("tia-lucy:language") === "it" ? "it" : "es";
+      return getStoredValue("chikki:language", "tia-lucy:language") === "it" ? "it" : "es";
     } catch (error) {
       return "es";
     }
@@ -282,25 +291,21 @@
 
   function saveLanguage() {
     try {
-      window.localStorage.setItem("tia-lucy:language", currentLanguage);
+      window.localStorage.setItem("chikki:language", currentLanguage);
     } catch (error) {
       // El sitio sigue funcionando si el navegador bloquea almacenamiento local.
     }
   }
 
   function getStoredSequence() {
-    try {
-      var stored = window.localStorage.getItem("tia-lucy:sequence-mode");
-      if (stored === "short" || stored === "full") return stored;
-    } catch (error) {
-      // Se usa la configuración inicial del sitio.
-    }
+    var stored = getStoredValue("chikki:sequence-mode", "tia-lucy:sequence-mode");
+    if (stored === "short" || stored === "full") return stored;
     return SITE.sequenceMode === "short" ? "short" : "full";
   }
 
   function saveSequence() {
     try {
-      window.localStorage.setItem("tia-lucy:sequence-mode", selectedSequence);
+      window.localStorage.setItem("chikki:sequence-mode", selectedSequence);
     } catch (error) {
       // El sitio sigue funcionando si el navegador bloquea almacenamiento local.
     }
@@ -327,7 +332,7 @@
       progressInterval = null;
     }
     clearAudioFades();
-    clearIntroMariachiAmbience();
+    clearIntroAmbience();
     window.clearTimeout(secondaryHintTimer);
     window.clearTimeout(secondaryHideTimer);
     secondaryHintTimer = null;
@@ -419,7 +424,14 @@
     } else {
       updatePauseButton();
       if (serenataAudio && serenataAudio._pausedByCtrl && !userMuted) {
-        serenataAudio.play()["catch"](function () {});
+        try {
+          var resumePromise = serenataAudio.play();
+          if (resumePromise && typeof resumePromise.catch === "function") {
+            resumePromise.catch(function () {});
+          }
+        } catch (resumeError) {
+          // El audio sintético sigue como respaldo.
+        }
         serenataAudio._pausedByCtrl = false;
       }
       if (audioContext && audioContext.state === "suspended" && !userMuted) {
@@ -543,11 +555,20 @@
       signatureElements[m].textContent = SITE.signature;
     }
 
-    var balloon1 = qs(".balloon-one .balloon-number");
-    var balloon2 = qs(".balloon-two .balloon-number");
+    // Velas del pastel con la edad real (ej. 26 -> "2" y "6").
     var ageStr = String(SITE.recipient.age);
-    if (balloon1) balloon1.textContent = ageStr.length > 0 ? ageStr[0] : "2";
-    if (balloon2) balloon2.textContent = ageStr.length > 1 ? ageStr[1] : "6";
+    var candleLeftDigit = qs("#candleLeft .candle-digit");
+    var candleRightDigit = qs("#candleRight .candle-digit");
+    if (candleLeftDigit) candleLeftDigit.textContent = ageStr.length > 0 ? ageStr[0] : "2";
+    if (candleRightDigit) candleRightDigit.textContent = ageStr.length > 1 ? ageStr[1] : "6";
+
+    // Instrucción del pastel (solo si aún no se pidió el deseo).
+    var candleInstruction = qs("#candleInstruction");
+    var candleLeft = qs("#candleLeft");
+    var wishGranted = candleLeft && candleLeft.classList.contains("extinguished");
+    if (candleInstruction && !wishGranted) {
+      candleInstruction.textContent = text("cakeInstruction");
+    }
 
     document.documentElement.lang = currentLanguage;
     document.title = activeText.documentTitle;
@@ -729,39 +750,6 @@
     }
   }
 
-  function setupMariachiInteraction() {
-    var mariachis = document.querySelectorAll(".mariachi");
-    for (var i = 0; i < mariachis.length; i += 1) {
-      (function (mariachi, index) {
-        mariachi.addEventListener("click", function (e) {
-          e.stopPropagation();
-          mariachi.classList.remove("bounce-effect");
-          void mariachi.offsetWidth; // Trigger reflow
-          mariachi.classList.add("bounce-effect");
-          timers.push(window.setTimeout(function () {
-            mariachi.classList.remove("bounce-effect");
-          }, 520));
-          showToast(index === 1 ? text("toastTrumpet") : text("toastGuitar"));
-
-          // Sonido musical al tocar a cada mariachi
-          if (!audioEnabled || !audioContext || userMuted) return;
-          var now = audioContext.currentTime;
-          if (index === 1) {
-            // Trompeta (mariachi central) - tono festivo brillante
-            tone(523.25, now, 0.16, "sawtooth", 0.035);
-            tone(659.25, now + 0.13, 0.28, "sawtooth", 0.035);
-          } else {
-            // Guitarra (mariachis laterales) - arpegiado alegre de cuerdas
-            var chord = index === 0 ? [329.63, 415.3, 493.88] : [293.66, 369.99, 440];
-            for (var n = 0; n < chord.length; n += 1) {
-              tone(chord[n], now + n * 0.05, 0.45, "triangle", 0.03);
-            }
-          }
-        });
-      }(mariachis[i], i));
-    }
-  }
-
   // ─── Audio (Web Audio API) ────────────────────────────────────────────────
 
   function tone(frequency, start, duration, type, gain) {
@@ -783,7 +771,7 @@
     }
   }
 
-  function introMariachiMusic() {
+  function introRomanticMusic() {
     if (!audioEnabled || !audioContext) return;
     var time = audioContext.currentTime;
     var chords = [
@@ -798,19 +786,19 @@
     }
   }
 
-  function clearIntroMariachiAmbience() {
+  function clearIntroAmbience() {
     if (introMusicTimer) {
       window.clearInterval(introMusicTimer);
       introMusicTimer = null;
     }
   }
 
-  function startIntroMariachiAmbience() {
-    clearIntroMariachiAmbience();
-    introMariachiMusic();
+  function startIntroAmbience() {
+    clearIntroAmbience();
+    introRomanticMusic();
     introMusicTimer = window.setInterval(function () {
       if (!experienceRunning || userMuted || isPaused || isSystemPaused) return;
-      introMariachiMusic();
+      introRomanticMusic();
     }, 4200);
   }
 
@@ -875,10 +863,17 @@
       clearAudioFades();
       serenataAudio.currentTime = 0;
       serenataAudio.volume      = 0;
-      serenataAudio.play()["catch"](function () {
-        // Fallback: si el navegador sigue bloqueando, toca el audio sintético
+      try {
+        var playPromise = serenataAudio.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(function () {
+            // Fallback: si el navegador sigue bloqueando, toca el audio sintético
+            serenadeMusic();
+          });
+        }
+      } catch (playError) {
         serenadeMusic();
-      });
+      }
       // Fade-in de 2 segundos hasta volumen 0.75
       var step   = 0.75 / 40;
       fadeInTimer = window.setInterval(function () {
@@ -1015,11 +1010,12 @@
     activeDelays = getActiveDelays();
 
     // Cambio visual primero; el audio nunca bloquea el botón.
-    stopSerenata(true);   // Parar Las Mañanitas de inmediato si se repite
+    stopSerenata(true);   // Parar la serenata de inmediato si se repite
     qs("#stage").classList.remove("open");
     qs("#stage").classList.remove("performing");
     qs(".birthday-message").classList.remove("show");
     qs(".personal-message").classList.remove("show");
+    resetCake();
     clearAnimated(confettiEl);
     showScene(qs("#celebration"));
     makeFallingRoses(40);
@@ -1033,13 +1029,13 @@
     // Respetar la decisión del usuario: solo activar audio si no silenció.
     if (!userMuted) {
       enableAudio();
-      startIntroMariachiAmbience();
+      startIntroAmbience();
       if (!audioReady && !audioFailed) showToast(text("audioLoading"));
 
       // ⚠️ Política de autoplay: el navegador solo permite reproducir audio si el
       // gesto del usuario está activo. Creamos el elemento <audio> y llamamos
       // .play() + .pause() AHORA (durante el clic) para "desbloquearlo".
-      // Así, cuando las cortinas se abran 32s después, el .play() funcionará
+      // Así, cuando la serenata empiece segundos después, el .play() funcionará
       // sin que el navegador lo rechace silenciosamente.
       if (!serenataAudio) {
         serenataAudio         = new Audio(SITE.audioUrl);
@@ -1047,14 +1043,18 @@
       }
       serenataAudio.volume      = 0;
       serenataAudio.currentTime = 0;
-      var primePromise = serenataAudio.play();
-      if (primePromise) {
-        primePromise.then(function () {
-          serenataAudio.pause();
-          serenataAudio.currentTime = 0;
-        })["catch"](function () {
-          // El navegador bloqueó incluso el gesto inicial — el audio sintético actuará de respaldo.
-        });
+      try {
+        var primePromise = serenataAudio.play();
+        if (primePromise && typeof primePromise.then === "function") {
+          primePromise.then(function () {
+            serenataAudio.pause();
+            serenataAudio.currentTime = 0;
+          }).catch(function () {
+            // El navegador bloqueó incluso el gesto inicial — el audio sintético actuará de respaldo.
+          });
+        }
+      } catch (primeError) {
+        // El audio sintético actuará de respaldo.
       }
     }
 
@@ -1069,7 +1069,7 @@
 
     schedule(function () {
       showScene(qs("#stage"));
-      clearIntroMariachiAmbience();
+      clearIntroAmbience();
       if (!userMuted) drumRoll();
     }, activeDelays.stageAppear, false);
 
@@ -1077,11 +1077,11 @@
       qs("#stage").classList.add("open");
       qs("#stage").classList.add("performing");
       playSerenata();
-    }, activeDelays.curtainsOpen, true);
+    }, activeDelays.serenadeStart, true);
 
     schedule(function () {
       showScene(qs("#finale"));
-      clearIntroMariachiAmbience();
+      clearIntroAmbience();
       stopSerenata(false);
       makeConfetti(80);
       makeFinaleGlow(28);
@@ -1142,9 +1142,9 @@
         return;
       }
       if (experienceRunning && elapsedTime < activeDelays.stageAppear) {
-        startIntroMariachiAmbience();
+        startIntroAmbience();
       }
-      if (experienceRunning && elapsedTime >= activeDelays.curtainsOpen && elapsedTime < activeDelays.finale && !isPaused && !isSystemPaused) {
+      if (experienceRunning && elapsedTime >= activeDelays.serenadeStart && elapsedTime < activeDelays.finale && !isPaused && !isSystemPaused) {
         playSerenata();
       }
       setSoundFeedback(text("soundOn"));
@@ -1175,7 +1175,14 @@
       isSystemPaused = false;
       if (!isPaused) {
         if (serenataAudio && serenataAudio._pausedBySystem && !userMuted) {
-          serenataAudio.play()["catch"](function () {});
+          try {
+            var systemResume = serenataAudio.play();
+            if (systemResume && typeof systemResume.catch === "function") {
+              systemResume.catch(function () {});
+            }
+          } catch (systemResumeError) {
+            // Se continúa solo con la parte visual.
+          }
           serenataAudio._pausedBySystem = false;
         }
         if (audioContext && audioContext.state === "suspended" && !userMuted) {
@@ -1192,11 +1199,16 @@
     showToast(message);
     if (!shareButton) return;
     if (shareFeedbackTimer) window.clearTimeout(shareFeedbackTimer);
-    var original = shareButton.dataset.originalLabel || shareButton.textContent;
-    shareButton.dataset.originalLabel = original;
+    if (!shareButton.dataset.originalLabel) {
+      shareButton.dataset.originalLabel = shareButton.innerHTML;
+    }
+    var original = shareButton.dataset.originalLabel;
     shareButton.textContent = message;
     shareFeedbackTimer = window.setTimeout(function () {
-      shareButton.textContent = original;
+      shareButton.innerHTML = original;
+      delete shareButton.dataset.originalLabel;
+      // Re-aplicar idioma por si cambió durante el feedback.
+      applySiteConfig();
       shareFeedbackTimer = null;
     }, 2500);
   }
@@ -1234,19 +1246,26 @@
     };
 
     if (typeof navigator.share === "function") {
-      navigator.share(shareData)["then"](function () {
-        setShareFeedback(text("shareThanks"));
-      })["catch"](function (error) {
-        if (error && error.name !== "AbortError") {
-          setShareFeedback(text("shareMenuError"));
+      try {
+        var sharePromise = navigator.share(shareData);
+        if (sharePromise && typeof sharePromise.then === "function") {
+          sharePromise.then(function () {
+            setShareFeedback(text("shareThanks"));
+          }).catch(function (error) {
+            if (error && error.name !== "AbortError") {
+              setShareFeedback(text("shareMenuError"));
+            }
+          });
         }
-      });
+      } catch (shareError) {
+        setShareFeedback(text("shareMenuError"));
+      }
     } else {
       copyShareLink(shareData.url)
         .then(function () {
           setShareFeedback(text("shareCopied"));
         })
-        ["catch"](function () {
+        .catch(function () {
           setShareFeedback(text("shareCopyError"));
         });
     }
@@ -1280,9 +1299,22 @@
   if (experience) {
     experience.addEventListener("pointerup", function (event) {
       if (!experienceRunning || !event.target.closest) return;
-      if (event.target.closest("button, label, .experience-controls, .mariachi, .rose, .petal")) return;
+      if (event.target.closest("button, label, .experience-controls, .romantic-btn, .rose, .petal")) return;
       showSecondaryControlsTemporarily();
     });
+  }
+
+  function playInstrumentToast(message, notes, waveType) {
+    if (audioEnabled && !userMuted && audioContext) {
+      try {
+        var now = audioContext.currentTime;
+        for (var n = 0; n < notes.length; n += 1) {
+          tone(notes[n].freq, now + notes[n].at, notes[n].dur, waveType || "sine", 0.04);
+        }
+      } catch (instrumentError) {
+        // El destello visual sigue aunque falle Web Audio.
+      }
+    }
   }
 
   function setupRomanticInstruments() {
@@ -1295,11 +1327,8 @@
         var x = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 200);
         var y = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 200);
         createSparkles(x, y);
-        if (audioContext) {
-          tone(659.25, audioContext.currentTime, 0.4, "sine", 0.04);
-          tone(880, audioContext.currentTime + 0.12, 0.45, "sine", 0.04);
-        }
-        showToast("🎻 Melodía romántica de violín para ti");
+        playInstrumentToast(text("violinToast"), [{ freq: 659.25, at: 0, dur: 0.4 }, { freq: 880, at: 0.12, dur: 0.45 }], "sine");
+        showToast(text("violinToast"));
       });
     }
     if (piano) {
@@ -1308,11 +1337,8 @@
         var x = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 200);
         var y = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 200);
         createSparkles(x, y);
-        if (audioContext) {
-          tone(523.25, audioContext.currentTime, 0.5, "triangle", 0.05);
-          tone(659.25, audioContext.currentTime + 0.15, 0.5, "triangle", 0.05);
-        }
-        showToast("🎹 Notas de piano acústico para ti");
+        playInstrumentToast(text("pianoToast"), [{ freq: 523.25, at: 0, dur: 0.5 }, { freq: 659.25, at: 0.15, dur: 0.5 }], "triangle");
+        showToast(text("pianoToast"));
       });
     }
     if (harp) {
@@ -1321,35 +1347,46 @@
         var x = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 200);
         var y = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 200);
         createSparkles(x, y);
-        if (audioContext) {
-          tone(783.99, audioContext.currentTime, 0.6, "sine", 0.04);
-          tone(1046.5, audioContext.currentTime + 0.2, 0.6, "sine", 0.04);
-        }
-        showToast("🪕 Acordes de arpa estrellada para ti");
+        playInstrumentToast(text("harpToast"), [{ freq: 783.99, at: 0, dur: 0.6 }, { freq: 1046.5, at: 0.2, dur: 0.6 }], "sine");
+        showToast(text("harpToast"));
       });
     }
+  }
+
+  function resetCake() {
+    var candle1 = qs("#candleLeft");
+    var candle2 = qs("#candleRight");
+    var instruction = qs("#candleInstruction");
+    if (candle1) candle1.classList.remove("extinguished");
+    if (candle2) candle2.classList.remove("extinguished");
+    if (instruction) instruction.textContent = text("cakeInstruction");
   }
 
   function setupCakeInteraction() {
     var cake = qs("#interactiveCake");
     if (!cake) return;
-    cake.addEventListener("click", function (e) {
+    cake.addEventListener("click", function () {
       var candle1 = qs("#candleLeft");
       var candle2 = qs("#candleRight");
       var instruction = qs("#candleInstruction");
+      var alreadyWished = candle1 && candle1.classList.contains("extinguished");
+      if (alreadyWished) {
+        // Segundo toque: re-encender para volver a pedir un deseo.
+        resetCake();
+        return;
+      }
       if (candle1) candle1.classList.add("extinguished");
       if (candle2) candle2.classList.add("extinguished");
-      if (instruction) instruction.textContent = "🎉 ¡Deseo concedido! ¡Te amo mi Chikki hermosa! 💖";
+      if (instruction) instruction.textContent = text("cakeWish");
       makeConfetti(35);
       makeFinaleGlow(15);
       makeFallingRoses(20);
       applause();
-      showToast("🎉 ¡Feliz Cumpleaños Nicoin! 🎂💖");
+      showToast(text("cakeToast"));
     });
   }
 
-  // Activar interactividad de mariachi e instrumentos románticos
-  setupMariachiInteraction();
+  // Activar interactividad romántica
   setupRomanticInstruments();
   setupCakeInteraction();
   setLanguage(currentLanguage);

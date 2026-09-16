@@ -687,89 +687,19 @@ h2 em {
   to   { opacity: 1; transform: none; }
 }
 
-/* ─── Escena 3: Escenario ────────────────────────────────────────────────── */
+/* ─── Escena 3: Pabellón romántico ───────────────────────────────────────── */
 
-/* perspective en el padre mejora el renderizado de rotateY en Firefox */
 .stage-scene {
   padding: 0;
   background: #17080c;
   overflow: hidden;
-  perspective: 1200px;
 }
 
-.stage-top {
-  position: absolute;
-  height: 13vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(#25080f, #521422);
-  box-shadow: 0 5px 18px #080203;
-  z-index: 5;
+.romantic-pavilion-scene {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 183, 3, 0.14), transparent 42%),
+    radial-gradient(ellipse at 50% 92%, #863432 0, #42151b 38%, #21090d 73%);
 }
-
-.stage-lights {
-  position: absolute;
-  top: 7vh;
-  z-index: 4;
-  display: flex;
-  width: min(80vw, 850px);
-  justify-content: space-between;
-  opacity: 0;
-  transition: opacity 1s;
-}
-
-.stage-lights i {
-  width: clamp(13px, 2vw, 23px);
-  height: clamp(13px, 2vw, 23px);
-  border-radius: 50%;
-  background: #fff5b1;
-  box-shadow:
-    0 0 12px 5px #eabe53,
-    0 0 50px 18px rgba(255, 202, 84, 0.35);
-}
-
-.stage-scene.open .stage-lights {
-  opacity: 1;
-}
-
-.curtain {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 54%;
-  z-index: 6;
-  background: repeating-linear-gradient(
-    90deg,
-    #7c1428 0 7%,
-    #9c2639 7% 14%,
-    #651020 14% 22%
-  );
-  box-shadow:
-    inset 12px 0 22px rgba(45, 0, 6, 0.4),
-    inset -12px 0 22px rgba(45, 0, 6, 0.42);
-  transition: transform 1.7s cubic-bezier(0.68, -0.2, 0.21, 1.08);
-}
-
-.curtain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(255, 150, 150, 0.12), transparent 40%, rgba(0, 0, 0, 0.25));
-}
-
-.curtain-left {
-  left: 0;
-  transform-origin: left center;
-}
-
-.curtain-right {
-  right: 0;
-  transform-origin: right center;
-}
-
-.stage-scene.open .curtain-left  { transform: translateX(-90%) rotateY(12deg); }
-.stage-scene.open .curtain-right { transform: translateX(90%)  rotateY(-12deg); }
 
 .stage-content {
   align-self: end;
@@ -781,10 +711,21 @@ h2 em {
   background: radial-gradient(ellipse at 50% 92%, #863432 0, #42151b 38%, #21090d 73%);
 }
 
+.romantic-pavilion-scene .stage-content.romantic-stage {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 100%;
+  padding: 96px 20px 72px;
+  background: transparent;
+}
+
 .announcement {
-  position: absolute;
   width: 100%;
-  top: 12%;
+  max-width: 640px;
   margin: 0;
   color: var(--gold);
   font: 700 clamp(1.35rem, 3.8vw, 2.7rem) / 1.15 "Playfair Display", serif;
@@ -793,224 +734,75 @@ h2 em {
   transition: 0.65s ease;
 }
 
+.romantic-stage .announcement {
+  position: static;
+}
+
 .stage-scene.open .announcement {
   opacity: 1;
   transform: none;
-  transition-delay: 1.5s;
+  transition-delay: 0.4s;
 }
 
-.mariachis {
-  position: absolute;
-  bottom: 3%;
-  width: min(86vw, 650px);
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: end;
-  justify-content: center;
-  gap: clamp(8px, 5vw, 58px);
+.romantic-pavilion-scene.open .constellation-container {
+  animation: constellation-glow 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes constellation-glow {
+  from { filter: drop-shadow(0 0 6px rgba(255, 183, 3, 0.35)); transform: translateX(-50%) scale(1); }
+  to { filter: drop-shadow(0 0 18px rgba(255, 77, 109, 0.65)); transform: translateX(-50%) scale(1.04); }
+}
+
+.romantic-pavilion-scene .romantic-ensemble {
   opacity: 0;
-  transition: opacity 0.7s ease 2s;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease 0.7s, transform 0.7s ease 0.7s;
 }
 
-.stage-scene.open .mariachis {
+.romantic-pavilion-scene.open .romantic-ensemble {
   opacity: 1;
+  transform: none;
 }
 
-.mariachi {
-  width: clamp(76px, 14vw, 120px);
-  height: clamp(175px, 30vw, 260px);
-  position: relative;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  animation: sway 2.1s ease-in-out infinite alternate;
-  filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.4));
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+.romantic-pavilion-scene.performing .romantic-btn {
+  animation: romantic-float 2.2s ease-in-out infinite alternate;
 }
 
-.mariachi:hover .guitar, .mariachi:hover .trumpet {
-  filter: drop-shadow(0 0 12px var(--gold));
-  transform: scale(1.15) rotate(-12deg);
-  transition: transform 0.25s ease, filter 0.25s ease;
+.romantic-pavilion-scene.performing .instrument-piano {
+  animation-delay: -0.7s;
 }
 
-.mariachi:focus-visible,
+.romantic-pavilion-scene.performing .instrument-harp {
+  animation-delay: -1.4s;
+}
+
+@keyframes romantic-float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+.romantic-btn:focus-visible,
 .ctrl-btn:focus-visible {
   outline: 3px solid #fff;
   outline-offset: 4px;
 }
 
-.mariachi.bounce-effect {
-  animation: mariachi-jump 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) !important;
-}
-
-.mariachi-center {
-  animation-delay: -0.8s;
-  transform: scale(1.12);
-  transform-origin: bottom;
-}
-
-.mariachi-center.bounce-effect {
-  animation: mariachi-jump-center 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) !important;
-}
-
-.mariachi-right {
-  animation-delay: -1.5s;
-}
-
-/* Coreografía al entrar la serenata: cada músico conserva su propio gesto. */
-.stage-scene.performing .mariachi-left {
-  animation: mariachi-guitar-left 1.45s ease-in-out infinite;
-}
-
-.stage-scene.performing .mariachi-center {
-  animation: mariachi-trumpet 1.45s ease-in-out 0.16s infinite;
-}
-
-.stage-scene.performing .mariachi-right {
-  animation: mariachi-guitar-right 1.45s ease-in-out 0.32s infinite;
-}
-
-@keyframes mariachi-guitar-left {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  24% { transform: translateY(-8px) rotate(2deg); }
-  48% { transform: translateY(0) rotate(-4deg); }
-  72% { transform: translateY(-5px) rotate(1deg); }
-}
-
-@keyframes mariachi-trumpet {
-  0%, 100% { transform: scale(1.12) translateY(0) rotate(0); }
-  28% { transform: scale(1.15) translateY(-12px) rotate(-2deg); }
-  50% { transform: scale(1.12) translateY(0) rotate(2deg); }
-  76% { transform: scale(1.14) translateY(-7px) rotate(-1deg); }
-}
-
-@keyframes mariachi-guitar-right {
-  0%, 100% { transform: translateY(0) rotate(2deg); }
-  24% { transform: translateY(-5px) rotate(-1deg); }
-  50% { transform: translateY(0) rotate(4deg); }
-  76% { transform: translateY(-9px) rotate(-2deg); }
-}
-
-@keyframes mariachi-jump {
-  0%, 100% { transform: translateY(0) scale(1); }
-  35% { transform: translateY(-24px) scale(1.06, 0.95); filter: drop-shadow(0 16px 12px rgba(0,0,0,0.6)); }
-  70% { transform: translateY(0) scale(0.96, 1.04); }
-}
-
-@keyframes mariachi-jump-center {
-  0%, 100% { transform: scale(1.12) translateY(0); }
-  35% { transform: scale(1.18, 1.05) translateY(-26px); filter: drop-shadow(0 16px 12px rgba(0,0,0,0.6)); }
-  70% { transform: scale(1.08, 1.16) translateY(0); }
-}
-
-.sombrero {
-  position: absolute;
-  width: 112%;
-  height: 20%;
-  top: 4%;
-  left: -6%;
-  border: clamp(4px, 0.7vw, 7px) solid #e7d0a5;
-  border-radius: 50% 50% 38% 38%;
-  background: #201719;
-  box-shadow: inset 0 6px #5d4a3c;
-  z-index: 3;
-}
-
-.sombrero::after {
-  content: "";
-  position: absolute;
-  height: 70%;
-  width: 47%;
-  border-radius: 50% 50% 0 0;
-  background: #211718;
-  left: 26%;
-  bottom: 45%;
-  border: 3px solid #e7d0a5;
-  border-bottom: 0;
-}
-
-.face {
-  position: absolute;
-  width: 42%;
-  aspect-ratio: 1;
-  top: 15%;
-  left: 29%;
-  border-radius: 48%;
-  background: #c8865c;
-  z-index: 2;
-}
-
-.face::after {
-  content: "";
-  position: absolute;
-  width: 60%;
-  height: 8%;
-  background: #422019;
-  border-radius: 50%;
-  bottom: 20%;
-  left: 20%;
-}
-
-.body {
-  position: absolute;
-  bottom: 0;
-  left: 15%;
-  width: 70%;
-  height: 67%;
-  background: linear-gradient(90deg, #101e23 0 42%, #1f3135 42% 58%, #101e23 58%);
-  border-radius: 38% 38% 5% 5%;
-  border: 2px solid #d9caad;
-}
-
-.body::before {
-  content: "";
-  position: absolute;
-  top: 8%;
-  left: 43%;
-  height: 86%;
-  width: 13%;
-  background: #e7d0a5;
-  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
-}
-
-.guitar,
-.trumpet {
-  position: absolute;
-  z-index: 5;
-  font-size: clamp(2.3rem, 5vw, 4.4rem);
-  bottom: 17%;
-  right: -20%;
-  transform: rotate(-22deg);
-}
-
-.trumpet {
-  right: -34%;
-  bottom: 38%;
-  transform: rotate(-7deg);
-}
-
 .singing {
-  position: absolute;
   width: 100%;
-  bottom: -2%;
-  margin: 0;
+  max-width: 560px;
+  margin: 8px 0 0;
   opacity: 0;
   color: #ffeac4;
   font: italic clamp(0.95rem, 2.4vw, 1.25rem) / 1.35 "Playfair Display", serif;
-  transition: opacity 0.5s ease 2.7s;
+  transition: opacity 0.5s ease 1.2s;
+}
+
+.romantic-stage .singing {
+  position: static;
 }
 
 .stage-scene.open .singing {
   opacity: 1;
-}
-
-@keyframes sway {
-  from { rotate: -2deg; }
-  to   { rotate:  2deg; }
 }
 
 /* ─── Escena 4: Finale ───────────────────────────────────────────────────── */
@@ -1057,88 +849,6 @@ h2 em {
 .family-signature strong {
   color: #fff5da;
   font-weight: 700;
-}
-
-/* ─── Globos ─────────────────────────────────────────────────────────────── */
-
-.balloon {
-  position: absolute;
-  width: clamp(72px, 14vw, 122px);
-  aspect-ratio: 0.8;
-  display: grid;
-  place-items: center;
-  color: #fff5dd;
-  border-radius: 52% 48% 50% 50% / 46% 46% 54% 54%;
-  box-shadow:
-    inset -14px -16px 25px rgba(50, 0, 12, 0.28),
-    inset 7px 5px 15px rgba(255, 255, 255, 0.24),
-    0 13px 22px rgba(31, 0, 5, 0.32);
-  animation: float 3s ease-in-out infinite alternate;
-}
-
-.balloon-number {
-  position: relative;
-  z-index: 2;
-  font: 700 clamp(2.8rem, 7vw, 5rem) "Playfair Display", serif;
-  text-shadow: 0 2px 3px rgba(70, 10, 20, 0.28);
-}
-
-.balloon::before {
-  content: "";
-  position: absolute;
-  width: 21%;
-  height: 32%;
-  left: 19%;
-  top: 13%;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0));
-  transform: rotate(21deg);
-  filter: blur(0.4px);
-}
-
-.balloon::after {
-  content: "";
-  position: absolute;
-  top: 97%;
-  left: calc(50% - 8px);
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 0;
-  border-top: 15px solid var(--knot);
-  filter: drop-shadow(0 2px 1px rgba(30, 0, 5, 0.25));
-}
-
-.balloon-string {
-  position: absolute;
-  top: calc(100% + 13px);
-  left: 50%;
-  width: 35px;
-  height: 160px;
-  border-left: 1px solid rgba(255, 232, 191, 0.72);
-  border-radius: 48% 0 0 45%;
-  transform: rotate(-4deg);
-  transform-origin: top;
-}
-
-.balloon-one {
-  --knot: #8e162d;
-  top: 14%;
-  left: 10%;
-  background: radial-gradient(circle at 32% 24%, #f06b7d 0, #c62e49 32%, #8c152f 72%, #5f1023 100%);
-}
-
-.balloon-two {
-  --knot: #a77526;
-  top: 21%;
-  right: 10%;
-  background: radial-gradient(circle at 32% 24%, #ffe09a 0, #dea94c 34%, #b57b25 72%, #79501c 100%);
-  animation-delay: -1.3s;
-}
-
-@keyframes float {
-  to {
-    transform: translateY(-18px) rotate(4deg);
-  }
 }
 
 /* ─── Confeti ────────────────────────────────────────────────────────────── */
@@ -1380,12 +1090,11 @@ h2 em {
     min-height: 34px;
     padding: 6px 9px;
   }
-  .stage-lights { top: 6vh; }
-  .announcement { top: 16%; }
-  .mariachis    { bottom: 6%; }
-  .singing      { bottom: 0; }
-  .balloon-one  { left: 3%; }
-  .balloon-two  { right: 3%; }
+  .romantic-pavilion-scene .stage-content.romantic-stage {
+    padding: 84px 16px 96px;
+  }
+  .romantic-ensemble { gap: 10px; }
+  .romantic-btn { padding: 12px 14px; }
   .finale-actions { flex-direction: column; }
   .finale-actions .button { min-width: min(100%, 250px); min-height: 48px; }
   .experience-controls {
@@ -1420,8 +1129,8 @@ h2 em {
 @media (prefers-reduced-motion: reduce) {
   /* Desactivar animaciones infinitas o de caída constante para evitar cinetosis y saturación de CPU */
   .night-sky,
-  .mariachi,
-  .balloon,
+  .romantic-btn,
+  .constellation-container,
   .shooting-stars i,
   .rose,
   .petal,
